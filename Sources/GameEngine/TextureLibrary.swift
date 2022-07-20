@@ -7,8 +7,8 @@
 
 import MetalKit
 
-class TextureLibrary {
-	enum Types {
+public class TextureLibrary {
+	public enum Types {
 		case None
 		case PartyPirateParot
 		case Cruiser
@@ -16,7 +16,7 @@ class TextureLibrary {
 	let _device: MTLDevice
 	private var _textures: [Types : Texture] = [:]
 	
-	init (device: MTLDevice) {
+	public init (device: MTLDevice) {
 		_device = device
 		createDefaultTextures()
 	}
@@ -27,32 +27,32 @@ class TextureLibrary {
 	private func addTexture(name: String, ext: String = "png", origin: MTKTextureLoader.Origin = .topLeft, forKey: Types){
 		_textures.updateValue(Texture(name, ext: ext, origin: origin, device: _device), forKey: forKey )
 	}
-	subscript (_ type: Types) -> MTLTexture? {
+	public subscript (_ type: Types) -> MTLTexture? {
 		return _textures[type]?.texture
 	}
 }
 
-class Texture {
+public class Texture {
 	var texture: MTLTexture!
 	
-	init(_ textureName: String, ext: String = "png", origin: MTKTextureLoader.Origin = .topLeft, device: MTLDevice){
+	public init(_ textureName: String, ext: String = "png", origin: MTKTextureLoader.Origin = .topLeft, device: MTLDevice){
 		let textureLoader = TextureLoader(textureName: textureName, textureExtension: ext, origin: origin, device: device)
 		let texture: MTLTexture = textureLoader.loadTextureFromBundle()
 		setTexture(texture)
 	}
 	
-	func setTexture(_ texture: MTLTexture){
+	public func setTexture(_ texture: MTLTexture){
 		self.texture = texture
 	}
 }
 
-class TextureLoader {
+public class TextureLoader {
 	private var _textureName: String!
 	private var _textureExtension: String!
 	private var _origin: MTKTextureLoader.Origin!
 	let _device: MTLDevice
 	
-	init(textureName: String, textureExtension: String = "png", origin: MTKTextureLoader.Origin = .topLeft, device: MTLDevice){
+	public init(textureName: String, textureExtension: String = "png", origin: MTKTextureLoader.Origin = .topLeft, device: MTLDevice){
 		self._textureName = textureName
 		self._textureExtension = textureExtension
 		self._origin = origin

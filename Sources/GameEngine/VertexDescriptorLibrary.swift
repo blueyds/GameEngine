@@ -8,19 +8,19 @@
 import MetalKit
 
 
-class VertexDescriptorLibrary {
-	enum Types {
+public class VertexDescriptorLibrary {
+	public enum Types {
 		case Basic
 	}
 
 	private var vertexDescriptors: [Types: VertexDescriptor] = [:]
-	init () {
+	public init () {
 		createDefaultVertexDescriptors()
 	}
 	private func createDefaultVertexDescriptors(){
 		createBasic()
 	}
-	func descriptor(_ vertexDescriptorType: Types) -> MTLVertexDescriptor {
+	public func descriptor(_ vertexDescriptorType: Types) -> MTLVertexDescriptor {
 		vertexDescriptors[vertexDescriptorType]!.vertexDescriptor
 	}
 	private func createBasic(){
@@ -39,24 +39,24 @@ class VertexDescriptorLibrary {
 	}
 }
 
-class VertexDescriptor {
+public class VertexDescriptor {
 	var name: String
 	var vertexDescriptor: MTLVertexDescriptor
-	init ( name: String, vertexDescriptor: MTLVertexDescriptor){
+	public init ( name: String, vertexDescriptor: MTLVertexDescriptor){
 		self.name = name
 		self.vertexDescriptor = vertexDescriptor
 	}
-	init (name: String){
+	public init (name: String){
 		self.name = name
 		vertexDescriptor = MTLVertexDescriptor()
 	}
-	func addAttribute(position: Int, format: MTLVertexFormat, offset: Int, bufferIndex: Int){
+	public func addAttribute(position: Int, format: MTLVertexFormat, offset: Int, bufferIndex: Int){
 		
 		vertexDescriptor.attributes[position].format = format
 		vertexDescriptor.attributes[position].offset = offset
 		vertexDescriptor.attributes[position].bufferIndex = bufferIndex
 	}
-	func addLayout(stride: Int, stepFunction: MTLVertexStepFunction = .perVertex, stepRate: Int = 1){
+	public func addLayout(stride: Int, stepFunction: MTLVertexStepFunction = .perVertex, stepRate: Int = 1){
 		vertexDescriptor.layouts[0].stride = stride
 		vertexDescriptor.layouts[0].stepFunction = stepFunction
 		vertexDescriptor.layouts[0].stepRate = stepRate

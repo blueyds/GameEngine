@@ -8,13 +8,13 @@
 import MetalKit
 
 
-protocol Mesh {
+public protocol Mesh {
 	func setInstanceCount(_ count: Int)
 	func drawPrimitives(_ renderCommandEncoder: MTLRenderCommandEncoder)
 }
 // TODO: rename entities
-class Entities {
-	enum Types {
+public class Entities {
+	public enum Types {
 		case None
 		case Triangle_Custom
 		case Quad_Custom
@@ -26,7 +26,7 @@ class Entities {
 	private var _device: MTLDevice!
 	private var _vertexDescriptorLibirary: VertexDescriptorLibrary
 	
-	init(device: MTLDevice!, vertexDescriptorLibrary: VertexDescriptorLibrary){
+	public init(device: MTLDevice!, vertexDescriptorLibrary: VertexDescriptorLibrary){
 		self._device = device
 		self._vertexDescriptorLibirary = vertexDescriptorLibrary
 		createDefaultMeshes()

@@ -7,18 +7,18 @@
 
 import Foundation
 
-class Keyboard {
+public class Keyboard {
 	private static let KEY_COUNT: Int = 256
 	private static var keys = [Bool].init(repeating: false, count: KEY_COUNT)
 	public static func SetKeyPressed(_ keyCode: UInt16, isOn: Bool){
 		keys[Int(keyCode)] = isOn
 	}
-	static func IsKeyPressed(_ keyCode: KeyCodes)-> Bool{
+	public static func IsKeyPressed(_ keyCode: KeyCodes)-> Bool{
 		return keys[Int(keyCode.rawValue)]
 	}
 }
 extension Keyboard {
-	enum KeyCodes: UInt16 {
+	public enum KeyCodes: UInt16 {
 		//Special Chars
 		case space             = 0x31
 		case returnKey         = 0x24

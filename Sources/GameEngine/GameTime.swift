@@ -2,11 +2,11 @@
 import Foundation
 
 
-class GameTime {
+public class GameTime {
 	private  var _lastUpdateTime: Date
     private  var _totalGameTime: TimeInterval
     private  var _deltaTime: TimeInterval
-	init() {
+	public init() {
 		_lastUpdateTime = Date()
 		_totalGameTime = 0.0
 		_deltaTime = 0.0

@@ -7,8 +7,8 @@
 
 import MetalKit
 
-class DepthStencilStateLibrary {
-	enum Types {
+public class DepthStencilStateLibrary {
+	public enum Types {
 		case Less
 	}
 	
@@ -16,7 +16,7 @@ class DepthStencilStateLibrary {
 	
 	private var device: MTLDevice
 	
-	init(device: MTLDevice) {
+	public init(device: MTLDevice) {
 		self.device = device
 		createDefaultDepthStencilStates()
 	}
@@ -25,18 +25,18 @@ class DepthStencilStateLibrary {
 		_depthStencilStates.updateValue(Less_DepthStencilState(device: device), forKey: .Less)
 	}
 	
-	func DepthStencilState(_ depthStencilState: Types)->MTLDepthStencilState{
+	public func DepthStencilState(_ depthStencilState: Types)->MTLDepthStencilState{
 		_depthStencilStates[depthStencilState]!.depthStencilState
 	}
 }
 
-protocol DepthStencilState {
+public protocol DepthStencilState {
 	var depthStencilState: MTLDepthStencilState! { get }
 }
 
-class Less_DepthStencilState: DepthStencilState {
-	var depthStencilState: MTLDepthStencilState!
-	init(device: MTLDevice){
+public class Less_DepthStencilState: DepthStencilState {
+	public var depthStencilState: MTLDepthStencilState!
+	public init(device: MTLDevice){
 		let depthStencilDescriptor = MTLDepthStencilDescriptor()
 		depthStencilDescriptor.isDepthWriteEnabled = true
 		depthStencilDescriptor.depthCompareFunction = .less

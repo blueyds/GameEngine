@@ -7,7 +7,7 @@
 
 import simd
 
-class ColorUtil {
+public class ColorUtil {
 	public static var randomColor: simd_float4 {
 		simd_float4(Float.randomZeroToOne,
 					Float.randomZeroToOne,

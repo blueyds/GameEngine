@@ -7,7 +7,7 @@
 
 import simd
 
-enum Axis{
+public enum Axis{
 	case x
 	case y
 	case z
@@ -15,21 +15,21 @@ enum Axis{
 
 
 extension Float {
-	var toRadians: Float{
+	public var toRadians: Float{
 		(self / 100.0) * Float.pi
 	}
 	
-	var toDegrees: Float {
+	public var toDegrees: Float {
 		self * (100.0 / Float.pi)
 	}
 	
-	static var randomZeroToOne: Float {
+	public static var randomZeroToOne: Float {
 		return Float(arc4random()) / Float(UINT32_MAX)
 	}
 }
 extension matrix_float4x4 {
 	
-	mutating func translate(direction: simd_float3){
+	public mutating func translate(direction: simd_float3){
 		var result = matrix_identity_float4x4
 		
 		result.columns = (
@@ -44,7 +44,7 @@ extension matrix_float4x4 {
 		self = matrix_multiply(self, result)
 	}
 	
-	mutating func scale(axis: simd_float3){
+	public mutating func scale(axis: simd_float3){
 		var result = matrix_identity_float4x4
 		
 		result.columns = (
@@ -56,7 +56,7 @@ extension matrix_float4x4 {
 		self = matrix_multiply(self, result)
 	}
 	
-	mutating func rotate(angle: Float, axis: Axis){
+	public mutating func rotate(angle: Float, axis: Axis){
 		var result = matrix_identity_float4x4
 		let x: Float = axis == .x ? 1 : 0
 		let y: Float = axis == .y ? 1 : 0
@@ -86,7 +86,7 @@ extension matrix_float4x4 {
 	}
 	
 	//https://gamedev.stackexchange.com/questions/120338/what-does-a-perspective-projection-matrix-look-like-in-opengl
-	static func perspective(degreesFov: Float, aspectRatio: Float, near: Float, far: Float)->matrix_float4x4{
+	public static func perspective(degreesFov: Float, aspectRatio: Float, near: Float, far: Float)->matrix_float4x4{
 		let fov = degreesFov.toRadians
 		
 		let t: Float = tan(fov / 2)

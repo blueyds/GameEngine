@@ -7,11 +7,11 @@
 
 import MetalKit
 
-final class Engine {
-	static let shared: Engine = Engine()
-	let device: MTLDevice!
-	let commandQueue: MTLCommandQueue!
-	var screenSize = simd_float2(repeating: 0)
+public final class Engine {
+	public static let shared: Engine = Engine()
+	public let device: MTLDevice!
+	public let commandQueue: MTLCommandQueue!
+	public var screenSize = simd_float2(repeating: 0)
 	private let _shaders: ShaderLibrary
 	private let _descriptors: VertexDescriptorLibrary
 //	private let _renderDescriptors: RenderDescriptorLibrary
@@ -22,33 +22,33 @@ final class Engine {
 	private let _textures: TextureLibrary
 	private let _samplerStates: SamplerStateLibrary
 	
-	func Vertex(_ vertexFunctionType: ShaderLibrary.VertexShaderTypes)-> MTLFunction{
+	public func Vertex(_ vertexFunctionType: ShaderLibrary.VertexShaderTypes)-> MTLFunction{
 		_shaders.Vertex(vertexFunctionType)
 	}
-	func Fragment(_ fragmentFunctionType: ShaderLibrary.FragmentShaderTypes)-> MTLFunction{
+	public func Fragment(_ fragmentFunctionType: ShaderLibrary.FragmentShaderTypes)-> MTLFunction{
 		_shaders.Fragment(fragmentFunctionType)
 	}
-	func Descriptor(_ vertexDescriptorType: VertexDescriptorLibrary.Types)->MTLVertexDescriptor{
+	public func Descriptor(_ vertexDescriptorType: VertexDescriptorLibrary.Types)->MTLVertexDescriptor{
 		_descriptors.descriptor(vertexDescriptorType)
 	}
 //	func RenderDescriptor(_ renderDescriptionType: RenderDescriptorLibrary.Types)-> MTLRenderPipelineDescriptor{
 //		_renderDescriptors.descriptor(renderDescriptionType)
 //	}
-	func RenderState(_ renderPipelineStateType: RenderPipelineLibrary.Types)-> MTLRenderPipelineState {
+	public func RenderState(_ renderPipelineStateType: RenderPipelineLibrary.Types)-> MTLRenderPipelineState {
 		_renderStates.renderState(renderPipelineStateType)
 	}
-	func Mesh(_ meshType: Entities.Types)->Mesh {
+	public func Mesh(_ meshType: Entities.Types)->Mesh {
 		_meshes.mesh(meshType)
 	}
 	
-	func DepthStencilStates(_ depthStencilStateType: DepthStencilStateLibrary.Types)-> MTLDepthStencilState {
+	public func DepthStencilStates(_ depthStencilStateType: DepthStencilStateLibrary.Types)-> MTLDepthStencilState {
 		_depthStencilStates.DepthStencilState(depthStencilStateType)
 	}
-	func Texture(_ textureType: TextureLibrary.Types)-> MTLTexture?{
+	public func Texture(_ textureType: TextureLibrary.Types)-> MTLTexture?{
 		_textures[textureType]
 	}
 	
-	func SamplerState(_ samplerStateType: SamplerStateLibrary.Types) -> MTLSamplerState{
+	public func SamplerState(_ samplerStateType: SamplerStateLibrary.Types) -> MTLSamplerState{
 		_samplerStates[samplerStateType]
 	}
 	

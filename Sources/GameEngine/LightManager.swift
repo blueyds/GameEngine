@@ -7,16 +7,16 @@
 
 import MetalKit
 import GameplayKit
-class LightManager {
+public class LightManager {
 	//private var _lightObjects: [LightObject] = []
 	var _components = GKComponentSystem<LightComponent>()
 	
-	init (){
+	public init (){
 		_components = GKComponentSystem<LightComponent>(componentClass: LightComponent.self)
 	}
 
 	
-	func setLightData(_ renderCommandEncoder: MTLRenderCommandEncoder) {
+	public func setLightData(_ renderCommandEncoder: MTLRenderCommandEncoder) {
 		var lightDatas: [LightData] = []
 		_components.components.forEach(){
 			lightDatas.append($0.lightData)
@@ -29,15 +29,15 @@ class LightManager {
 											  length: LightData.stride(lightCount),
 											  index: 3)
 	}
-	func updateAll(deltaTime: TimeInterval){
+	public func updateAll(deltaTime: TimeInterval){
 		_components.update(deltaTime: deltaTime)
 	}
 	
-	func addComponent(foundIn fromNode: GameNode){
+	public func addComponent(foundIn fromNode: GameNode){
 		_components.addComponent(foundIn: fromNode)
 		print("Light system has \(_components.components.count) lights")
 	}
-	func removeComponent(foundIn fromNode: GameNode){
+	public func removeComponent(foundIn fromNode: GameNode){
 		_components.removeComponent(foundIn: fromNode)
 	}
 }

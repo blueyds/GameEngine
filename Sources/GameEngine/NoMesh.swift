@@ -7,8 +7,8 @@
 
 import MetalKit
 
-class NoMesh: Mesh {
-	func setInstanceCount(_ count: Int) {}
+public class NoMesh: Mesh {
+	public func setInstanceCount(_ count: Int) {}
 	
 	func drawPrimitives(_ renderCommandEncoder: MTLRenderCommandEncoder) {}
 	

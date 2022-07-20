@@ -8,22 +8,22 @@
 import simd
 import Foundation
 
-protocol sizeable{
+public protocol sizeable{
 	static func size( _ count: Int)-> Int
 	static func stride(_ count: Int)-> Int
 }
 
 extension sizeable{
-	static var size: Int {
+	public static var size: Int {
 		MemoryLayout<Self>.size
 	}
-	static var stride: Int {
+	public static var stride: Int {
 		MemoryLayout<Self>.stride
 	}
-	static func size(_ count: Int) -> Int {
+	public static func size(_ count: Int) -> Int {
 		MemoryLayout<Self>.size * count
 	}
-	static func stride(_ count: Int)-> Int {
+	public static func stride(_ count: Int)-> Int {
 		MemoryLayout<Self>.stride * count
 	}
 }
@@ -35,10 +35,10 @@ extension simd_float2: sizeable {}
 extension Float: sizeable {}
 
 extension TimeInterval {
- var Milliseconds: Int{
+ public var Milliseconds: Int{
 	 return Int((self * 1000).rounded())
  }
- var RatePerSecond:Float {
+ public var RatePerSecond:Float {
 //	 let v1 = self.Milliseconds
 //
 //	 let v3  = 1 / v2

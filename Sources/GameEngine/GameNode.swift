@@ -7,16 +7,16 @@
 
 import MetalKit
 import GameplayKit
-class GameNode: GKEntity, Identifiable{
+public class GameNode: GKEntity, Identifiable{
 	private var _name: String
-	let id = UUID()
+	public let id = UUID()
 	
 	private var _position: simd_float3 = simd_float3(repeating: 0)
 	private var _scale: simd_float3 = simd_float3(repeating: 1)
 	private var _rotation: simd_float3 = simd_float3(repeating: 0)
 	
-	var parentModelMatrix = matrix_identity_float4x4
-	var modelMatrix : matrix_float4x4 {
+	public var parentModelMatrix = matrix_identity_float4x4
+	public var modelMatrix : matrix_float4x4 {
 		var matrix = matrix_identity_float4x4
 		matrix.translate(direction: _position)
 		matrix.scale(axis: _scale)
@@ -26,9 +26,9 @@ class GameNode: GKEntity, Identifiable{
 		return matrix_multiply(parentModelMatrix, matrix)
 		
 	}
-	var children: [GameNode] = []
+	public var children: [GameNode] = []
 	
-	init(name: String){
+	public init(name: String){
 		self._name = name
 		super.init()
 	}
@@ -36,12 +36,12 @@ class GameNode: GKEntity, Identifiable{
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
-	func addChild(_ child: GameNode){
+	public func addChild(_ child: GameNode){
 		children.append(child)
 	}
 	
 	
-	func updateChildrenMatrix(){
+	public func updateChildrenMatrix(){
 //		if let updateable = self as? Updateable {
 //			updateable.doUpdate(GameTime.DeltaTime)
 //		}
@@ -55,53 +55,53 @@ class GameNode: GKEntity, Identifiable{
 // General translation extensions
 extension GameNode {
 	//Naming
-	func setName(_ name: String){ self._name = name }
-	func getName()->String{ return _name }
-	func getID()->String { return id.uuidString }
+	public func setName(_ name: String){ self._name = name }
+	public func getName()->String{ return _name }
+	public func getID()->String { return id.uuidString }
 	
 	//Positioning and Movement
-	func setPosition(_ position: simd_float3){ self._position = position }
-	func setPositionX(_ xPosition: Float) { self._position.x = xPosition }
-	func setPositionY(_ yPosition: Float) { self._position.y = yPosition }
-	func setPositionZ(_ zPosition: Float) { self._position.z = zPosition }
-	func setPosition(x: Float, y: Float, z: Float) { setPosition(simd_float3(x, y, z))}
-	func getPosition()->simd_float3 { return self._position }
-	func getPositionX()->Float { return self._position.x }
-	func getPositionY()->Float { return self._position.y }
-	func getPositionZ()->Float { return self._position.z }
-	func move(_ x: Float, _ y: Float, _ z: Float){ self._position += simd_float3(x,y,z) }
-	func moveX(_ delta: Float){ self._position.x += delta }
-	func moveY(_ delta: Float){ self._position.y += delta }
-	func moveZ(_ delta: Float){ self._position.z += delta }
+	public func setPosition(_ position: simd_float3){ self._position = position }
+	public func setPositionX(_ xPosition: Float) { self._position.x = xPosition }
+	public func setPositionY(_ yPosition: Float) { self._position.y = yPosition }
+	public func setPositionZ(_ zPosition: Float) { self._position.z = zPosition }
+	public func setPosition(x: Float, y: Float, z: Float) { setPosition(simd_float3(x, y, z))}
+	public func getPosition()->simd_float3 { return self._position }
+	public func getPositionX()->Float { return self._position.x }
+	public func getPositionY()->Float { return self._position.y }
+	public func getPositionZ()->Float { return self._position.z }
+	public func move(_ x: Float, _ y: Float, _ z: Float){ self._position += simd_float3(x,y,z) }
+	public func moveX(_ delta: Float){ self._position.x += delta }
+	public func moveY(_ delta: Float){ self._position.y += delta }
+	public func moveZ(_ delta: Float){ self._position.z += delta }
 	
 	//Rotating
-	func setRotation(_ rotation: simd_float3) { self._rotation = rotation }
-	func setRotation(x: Float, y: Float, z: Float){setRotation(simd_float3(x, y, z))}
-	func setRotationX(_ xRotation: Float) { self._rotation.x = xRotation }
-	func setRotationY(_ yRotation: Float) { self._rotation.y = yRotation }
-	func setRotationZ(_ zRotation: Float) { self._rotation.z = zRotation }
-	func getRotation()->simd_float3 { return self._rotation }
-	func getRotationX()->Float { return self._rotation.x }
-	func getRotationY()->Float { return self._rotation.y }
-	func getRotationZ()->Float { return self._rotation.z }
-	func rotate(_ x: Float, _ y: Float, _ z: Float){ self._rotation += simd_float3(x,y,z) }
-	func rotateX(_ delta: Float){ self._rotation.x += delta }
-	func rotateY(_ delta: Float){ self._rotation.y += delta }
-	func rotateZ(_ delta: Float){ self._rotation.z += delta }
+	public func setRotation(_ rotation: simd_float3) { self._rotation = rotation }
+	public func setRotation(x: Float, y: Float, z: Float){setRotation(simd_float3(x, y, z))}
+	public func setRotationX(_ xRotation: Float) { self._rotation.x = xRotation }
+	public func setRotationY(_ yRotation: Float) { self._rotation.y = yRotation }
+	public func setRotationZ(_ zRotation: Float) { self._rotation.z = zRotation }
+	public func getRotation()->simd_float3 { return self._rotation }
+	public func getRotationX()->Float { return self._rotation.x }
+	public func getRotationY()->Float { return self._rotation.y }
+	public func getRotationZ()->Float { return self._rotation.z }
+	public func rotate(_ x: Float, _ y: Float, _ z: Float){ self._rotation += simd_float3(x,y,z) }
+	public func rotateX(_ delta: Float){ self._rotation.x += delta }
+	public func rotateY(_ delta: Float){ self._rotation.y += delta }
+	public func rotateZ(_ delta: Float){ self._rotation.z += delta }
 	
 	//Scaling
-	func setScale(_ scale: simd_float3){ self._scale = scale }
-	func setScale(_ scale: Float){setScale(simd_float3(scale, scale, scale))}
-	func setScaleX(_ scaleX: Float){ self._scale.x = scaleX }
-	func setScaleY(_ scaleY: Float){ self._scale.y = scaleY }
-	func setScaleZ(_ scaleZ: Float){ self._scale.z = scaleZ }
-	func getScale()->simd_float3 { return self._scale }
-	func getScaleX()->Float { return self._scale.x }
-	func getScaleY()->Float { return self._scale.y }
-	func getScaleZ()->Float { return self._scale.z }
-	func scaleX(_ delta: Float){ self._scale.x += delta }
-	func scaleY(_ delta: Float){ self._scale.y += delta }
-	func scaleZ(_ delta: Float){ self._scale.z += delta }
+	public func setScale(_ scale: simd_float3){ self._scale = scale }
+	public func setScale(_ scale: Float){setScale(simd_float3(scale, scale, scale))}
+	public func setScaleX(_ scaleX: Float){ self._scale.x = scaleX }
+	public func setScaleY(_ scaleY: Float){ self._scale.y = scaleY }
+	public func setScaleZ(_ scaleZ: Float){ self._scale.z = scaleZ }
+	public func getScale()->simd_float3 { return self._scale }
+	public func getScaleX()->Float { return self._scale.x }
+	public func getScaleY()->Float { return self._scale.y }
+	public func getScaleZ()->Float { return self._scale.z }
+	public func scaleX(_ delta: Float){ self._scale.x += delta }
+	public func scaleY(_ delta: Float){ self._scale.y += delta }
+	public func scaleZ(_ delta: Float){ self._scale.z += delta }
 }
 
 //// Mesh Extensions

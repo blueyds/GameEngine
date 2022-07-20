@@ -1,7 +1,7 @@
 import MetalKit
 
-class RenderPipelineLibrary {
-	enum Types{
+public class RenderPipelineLibrary {
+	public enum Types{
 		case Basic
 		case Instanced
 	}
@@ -12,18 +12,18 @@ class RenderPipelineLibrary {
 	
 	private var _renderPipelineStates: [Types: RenderPipelineState] = [:]
 	
-	init(device: MTLDevice!,library: ShaderLibrary, vertexDescriptorLibrary: VertexDescriptorLibrary, preferences: Preferences){
+	public init(device: MTLDevice!,library: ShaderLibrary, vertexDescriptorLibrary: VertexDescriptorLibrary, preferences: Preferences){
 		self.device = device
 		self._library = library
 		self._vertexDescriptor = vertexDescriptorLibrary
 		self._preferences = preferences
 		createDefaultStates()
 	}
-	func renderState(_ renderStateType: Types)-> MTLRenderPipelineState{
+	public func renderState(_ renderStateType: Types)-> MTLRenderPipelineState{
 		_renderPipelineStates[renderStateType]!.state
 	}
 	
-	func createDefaultStates(){
+	public func createDefaultStates(){
 		createState("Basic Render State",
 					renderDescriptor: createDescriptor(
 						pixelFormat: _preferences.mainPixelFormat,
@@ -42,7 +42,7 @@ class RenderPipelineLibrary {
 					forKey: .Instanced)
 		
 	}
-	func createState(_ name: String,
+	public func createState(_ name: String,
 						   renderDescriptor: MTLRenderPipelineDescriptor,
 						   forKey: Types) {
 		do{
@@ -53,7 +53,7 @@ class RenderPipelineLibrary {
 			print("ERROR Creating Render Pipeline State for \(name) error = \(error)")
 		}
 	}
-	func createDescriptor(
+	public func createDescriptor(
 	
 		pixelFormat: MTLPixelFormat,
 		depthPixelFormat: MTLPixelFormat,
@@ -71,10 +71,10 @@ class RenderPipelineLibrary {
 	
 }
 
-class RenderPipelineState{
-	var name: String
-	var state: MTLRenderPipelineState
-	init (name: String, state: MTLRenderPipelineState){
+public class RenderPipelineState{
+	public var name: String
+	public var state: MTLRenderPipelineState
+	public init (name: String, state: MTLRenderPipelineState){
 		self.name = name
 		self.state = state
 	}

@@ -1,6 +1,6 @@
 import MetalKit
 
-class Cube_CustomMesh: CustomMesh {
+public class Cube_CustomMesh: CustomMesh {
 	override func createVertices() {
 		//Left
 		addVertex(position: simd_float3(-1.0,-1.0,-1.0), color: simd_float4(1.0, 0.5, 0.0, 1.0))

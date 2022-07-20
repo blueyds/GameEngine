@@ -8,23 +8,23 @@
 import MetalKit
 import GameplayKit
 
-class MeshComponent: GKComponent {
-	var modelConstants: [ModelConstants] = []
-	var material = Material()
+public class MeshComponent: GKComponent {
+	public var modelConstants: [ModelConstants] = []
+	public var material = Material()
 	var _textureType: TextureLibrary.Types = .None
-	var mesh: Mesh!
-	var renderState: RenderPipelineLibrary.Types
-	var depthStencilStates = Engine.shared.DepthStencilStates(.Less)
-	var samplerState = Engine.shared.SamplerState(.Linear)
+	public var mesh: Mesh!
+	public var renderState: RenderPipelineLibrary.Types
+	public var depthStencilStates = Engine.shared.DepthStencilStates(.Less)
+	public var samplerState = Engine.shared.SamplerState(.Linear)
 	private var _modelConstantBuffer: MTLBuffer!
 	
-	init (meshType: Entities.Types) {
+	public init (meshType: Entities.Types) {
 		mesh = Engine.shared.Mesh(meshType)
 		modelConstants.append(ModelConstants())
 		renderState = .Basic
 		super.init()
 	}
-	init(meshType: Entities.Types, instanceCount: Int){
+	public init(meshType: Entities.Types, instanceCount: Int){
 		mesh = Engine.shared.Mesh(meshType)
 		mesh.setInstanceCount(instanceCount)
 		renderState = .Instanced
@@ -54,7 +54,7 @@ class MeshComponent: GKComponent {
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
-	override func update(deltaTime: TimeInterval) {
+	public override func update(deltaTime: TimeInterval) {
 		updateModelConstants()
 		super.update(deltaTime: deltaTime)
 	}
@@ -75,7 +75,7 @@ class MeshComponent: GKComponent {
 		}
 	}
 	
-	func doRender(_ renderCommandEncoder: MTLRenderCommandEncoder) {
+	public func doRender(_ renderCommandEncoder: MTLRenderCommandEncoder) {
 		renderCommandEncoder.setRenderPipelineState(Engine.shared.RenderState(renderState))
 		renderCommandEncoder.setDepthStencilState(depthStencilStates)
 		

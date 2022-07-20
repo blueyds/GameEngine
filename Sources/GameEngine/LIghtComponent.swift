@@ -8,9 +8,9 @@
 import MetalKit
 import GameplayKit
 
-class LightComponent: GKComponent {
-	var lightData: LightData = LightData()
-	override init(){
+public class LightComponent: GKComponent {
+	public var lightData: LightData = LightData()
+	public override init(){
 		lightData = LightData()
 		super.init()
 	}
@@ -18,7 +18,7 @@ class LightComponent: GKComponent {
 		fatalError("init(coder:) has not been implemented")
 	}
 
-	override func update(deltaTime: TimeInterval) {
+	public override func update(deltaTime: TimeInterval) {
 		if let node = entity as? GameNode {
 			lightData.position = node.getPosition()
 		}

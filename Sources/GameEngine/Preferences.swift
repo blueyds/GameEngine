@@ -8,7 +8,7 @@
 import MetalKit
 
 
-class Preferences {
+public class Preferences {
 	public enum ClearColors{
 		static let White = MTLClearColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
 		static let Green = MTLClearColor(red: 0.22, green: 0.55, blue: 0.34, alpha: 1.0)
@@ -18,12 +18,15 @@ class Preferences {
 		static let LimeGreen = MTLClearColor(red: 0.3, green: 0.7, blue: 0.3, alpha: 1)
 	}
 	
-	static let shared: Preferences = Preferences()
-	let clearColor: MTLClearColor = ClearColors.DarkGrey
-	let mainPixelFormat: MTLPixelFormat = MTLPixelFormat.bgra8Unorm_srgb
-	let mainDepthPixelFormat: MTLPixelFormat = MTLPixelFormat.depth32Float
-	let framesPerSEcond: Int = 60
-	let startingSceneType: SceneManager.Types = .Sandbox
+	public static let shared: Preferences = Preferences()
+	//MARK: change these to vars so we can change
+	public let clearColor: MTLClearColor = ClearColors.DarkGrey
+	public let mainPixelFormat: MTLPixelFormat = MTLPixelFormat.bgra8Unorm_srgb
+	public let mainDepthPixelFormat: MTLPixelFormat = MTLPixelFormat.depth32Float
+	public let framesPerSEcond: Int = 60
+	// MARK: do we oneed this in the framework
+	
+	public var startingSceneType: SceneManager.Types = .Sandbox
 	private init(){
 		
 	}

@@ -8,14 +8,14 @@
 import Foundation
 import Metal
 
-class SamplerStateLibrary {
-	enum Types {
+public class SamplerStateLibrary {
+	public enum Types {
 		case None
 		case Linear
 	}
 	private var _states: [Types : SamplerState]=[:]
 	private var _device: MTLDevice
-	init(device: MTLDevice){
+	public init(device: MTLDevice){
 		_device = device
 		createdefaultSamplers()
 	}
@@ -25,15 +25,15 @@ class SamplerStateLibrary {
 	private func addSampler(_ name: String, minFilter: MTLSamplerMinMagFilter, magFilter: MTLSamplerMinMagFilter, forKey: Types){
 		_states.updateValue(SamplerState(name, minFilter: minFilter, magFilter: magFilter, device: _device), forKey: forKey)
 	}
-	subscript(_ type: Types) -> MTLSamplerState {
+	public subscript(_ type: Types) -> MTLSamplerState {
 		(_states[type]?.samplerState)!
 	}
 }
 
-class SamplerState{
-	var name: String
-	var samplerState: MTLSamplerState
-	init(_ name: String, minFilter: MTLSamplerMinMagFilter = .linear, magFilter: MTLSamplerMinMagFilter = .linear, device: MTLDevice){
+public class SamplerState{
+	public var name: String
+	public var samplerState: MTLSamplerState
+	public init(_ name: String, minFilter: MTLSamplerMinMagFilter = .linear, magFilter: MTLSamplerMinMagFilter = .linear, device: MTLDevice){
 		self.name = name
 		let samplerDescriptor = MTLSamplerDescriptor()
 		samplerDescriptor.minFilter = minFilter

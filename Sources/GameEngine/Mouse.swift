@@ -8,8 +8,8 @@
 import Foundation
 import MetalKit
 
-class Mouse {
-	enum MouseCodes: Int {
+public class Mouse {
+	public enum MouseCodes: Int {
 		case left = 0
 		case right = 1
 		case center = 2

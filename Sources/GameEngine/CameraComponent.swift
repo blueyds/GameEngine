@@ -7,8 +7,8 @@
 import MetalKit
 import GameplayKit
 
-class CameraComponent: GKComponent {
-	enum Types {
+public class CameraComponent: GKComponent {
+	public enum Types {
 		case Debug
 	}
 	var cameraType: Types!
@@ -40,7 +40,7 @@ class CameraComponent: GKComponent {
 										   far: _far)
 	}
 	
-	init(cameraType: Types, fov: Float, aspectRatio: Float, near: Float, far: Float){
+	public init(cameraType: Types, fov: Float, aspectRatio: Float, near: Float, far: Float){
 		self.cameraType = cameraType
 		self._fov = fov
 		self._aspectRation = aspectRatio
@@ -54,16 +54,16 @@ class CameraComponent: GKComponent {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	func setFov(fov: Float){
+	public func setFov(fov: Float){
 		_fov = fov
 	}
-	func setAspectRation(_ ratio: Float){
+	public func setAspectRation(_ ratio: Float){
 		_aspectRation = ratio
 	}
-	func setNear(_ near: Float){
+	public func setNear(_ near: Float){
 		_near = near
 	}
-	func setFar(_ far: Float){
+	public func setFar(_ far: Float){
 		_far = far
 	}
 	

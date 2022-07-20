@@ -8,12 +8,12 @@
 import MetalKit
 
 
-class ShaderLibrary {
-	enum VertexShaderTypes{
+public class ShaderLibrary {
+	public enum VertexShaderTypes{
 		case Basic
 		case Instanced
 	}
-	enum FragmentShaderTypes{
+	public enum FragmentShaderTypes{
 		case Basic
 	}
 
@@ -22,47 +22,47 @@ class ShaderLibrary {
 	private var vertexShaders: [VertexShaderTypes: Shader]=[:]
 	private var fragmentShaders: [FragmentShaderTypes: Shader]=[:]
 	
-	init (device: MTLDevice){
+	public init (device: MTLDevice){
 		self.device = device
 		if let lib = self.device.makeDefaultLibrary(){
 			library = lib
 		} else { fatalError("Could not create library")}
 		createDefaultShaders()
 	}
-	func createDefaultShaders(){
+	public func createDefaultShaders(){
 		createVertexShader("Basic Vertex Shader",	functionName: "basic_vertex_shader",forKey: .Basic)
 		createVertexShader("Instanced Vertex Shader", functionName: "instanced_vertex_shader", forKey: .Instanced)
 		
 		createFragmentShader("Basic Fragment Shader", functionName: "basic_fragment_shader", forKey: .Basic)
 	}
-	private func createVertexShader(_ name: String, functionName: String, forKey: VertexShaderTypes){
+	public func createVertexShader(_ name: String, functionName: String, forKey: VertexShaderTypes){
 		vertexShaders.updateValue(
 			Shader(name: name,
 				functionName: functionName,
 				  library: library),
 			forKey: forKey)
 	}
-	private func createFragmentShader(_ name: String, functionName: String, forKey: FragmentShaderTypes){
+	public func createFragmentShader(_ name: String, functionName: String, forKey: FragmentShaderTypes){
 		fragmentShaders.updateValue(
 			Shader(name: name,
 				functionName: functionName,
 				  library: library),
 			forKey: forKey)
 	}
-	func Vertex(_ vertexShaderType: VertexShaderTypes)-> MTLFunction{
+	public func Vertex(_ vertexShaderType: VertexShaderTypes)-> MTLFunction{
 		vertexShaders[vertexShaderType]!.function
 	}
-	func Fragment(_ fragmentShaderType: FragmentShaderTypes) -> MTLFunction{
+	public func Fragment(_ fragmentShaderType: FragmentShaderTypes) -> MTLFunction{
 		fragmentShaders[fragmentShaderType]!.function
 	}
 }
 
 extension ShaderLibrary {
-	class Shader {
+	public class Shader {
 		var name: String
 		var functionName: String
 		var function: MTLFunction
-		init(name: String, functionName: String, library: MTLLibrary!){
+		public init(name: String, functionName: String, library: MTLLibrary!){
 			self.name = name
 			self.functionName = functionName
 			self.function = library.makeFunction(name: functionName)!
