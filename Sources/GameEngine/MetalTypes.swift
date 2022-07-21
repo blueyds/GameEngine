@@ -47,40 +47,40 @@ extension TimeInterval {
 	}
 }
 
-struct Vertex: sizeable {
-	var position: simd_float3
-	var color: simd_float4
-	var textureCoordinate: simd_float2
-	var normal: simd_float3
+public struct Vertex: sizeable {
+	public var position: simd_float3
+	public var color: simd_float4
+	public var textureCoordinate: simd_float2
+	public var normal: simd_float3
 }
 
-struct ModelConstants: sizeable {
-	var modelMatrix = matrix_identity_float4x4
+public struct ModelConstants: sizeable {
+	public var modelMatrix = matrix_identity_float4x4
 }
 
-struct SceneConstants:sizeable {
-	var totalGameTime: Float = 0
-	var viewMatrix = matrix_identity_float4x4
-	var projectionMatrix = matrix_identity_float4x4
-	var cameraPosition: simd_float3 = simd_float3(repeating: 0)
+public struct SceneConstants:sizeable {
+	public var totalGameTime: Float = 0
+	public var viewMatrix = matrix_identity_float4x4
+	public var projectionMatrix = matrix_identity_float4x4
+	public var cameraPosition: simd_float3 = simd_float3(repeating: 0)
 }
 
-struct Material: sizeable {
-	var color = simd_float4(0, 0, 0, 1)
-	var useMaterialColor = false
-	var useTexture: Bool = false
-	var isLit: Bool = true
-	var ambient: simd_float3 = simd_float3(repeating: 0.1)
-	var diffuse: simd_float3 = simd_float3(repeating: 1)
-	var specular: simd_float3 = simd_float3(repeating: 1)
-	var shininess: Float = 50
+public struct Material: sizeable {
+	public var color = simd_float4(0, 0, 0, 1)
+	public var useMaterialColor = false
+	public var useTexture: Bool = false
+	public var isLit: Bool = true
+	public var ambient: simd_float3 = simd_float3(repeating: 0.1)
+	public var diffuse: simd_float3 = simd_float3(repeating: 1)
+	public var specular: simd_float3 = simd_float3(repeating: 1)
+	public var shininess: Float = 50
 }
 
-struct LightData: sizeable {
-	var position: simd_float3 = simd_float3(0, 0, 0)
-	var color: simd_float3 = simd_float3(1, 1, 1)
-	var brightness: Float = 1.0
-	var ambientIntensity: Float = 1.0
-	var diffuseIntensity: Float = 1.0
-	var specularIntensity: Float = 1.0
+public struct LightData: sizeable {
+	public var position: simd_float3 = simd_float3(0, 0, 0)
+	public var color: simd_float3 = simd_float3(1, 1, 1)
+	public var brightness: Float = 1.0
+	public var ambientIntensity: Float = 1.0
+	public var diffuseIntensity: Float = 1.0
+	public var specularIntensity: Float = 1.0
 }

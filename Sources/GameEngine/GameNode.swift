@@ -7,7 +7,7 @@
 
 import MetalKit
 import GameplayKit
-public class GameNode: GKEntity, Identifiable{
+open class GameNode: GKEntity, Identifiable{
 	private var _name: String
 	public let id = UUID()
 	
@@ -33,7 +33,7 @@ public class GameNode: GKEntity, Identifiable{
 		super.init()
 	}
 	
-	required init?(coder: NSCoder) {
+	public required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
 	public func addChild(_ child: GameNode){

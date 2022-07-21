@@ -10,6 +10,6 @@ import MetalKit
 public class NoMesh: Mesh {
 	public func setInstanceCount(_ count: Int) {}
 	
-	func drawPrimitives(_ renderCommandEncoder: MTLRenderCommandEncoder) {}
+	public func drawPrimitives(_ renderCommandEncoder: MTLRenderCommandEncoder) {}
 	
 }

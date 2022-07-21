@@ -24,9 +24,9 @@ public class ShaderLibrary {
 	
 	public init (device: MTLDevice){
 		self.device = device
-		if let lib = self.device.makeDefaultLibrary(){
-			library = lib
-		} else { fatalError("Could not create library")}
+		guard let lib = try? self.device.makeDefaultLibrary(bundle: Bundle.module)
+		else { fatalError("Could not create library")}
+		self.library = lib
 		createDefaultShaders()
 	}
 	public func createDefaultShaders(){

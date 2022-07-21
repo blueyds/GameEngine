@@ -8,7 +8,7 @@
 import MetalKit
 import GameplayKit
 
-public class GameScene: GameNode {
+open class GameScene: GameNode {
 	
 	public var _meshManager = MeshManager()
 	public var _lightManager = LightManager()
@@ -23,11 +23,11 @@ public class GameScene: GameNode {
 		print(self)
 	}
 	
-	required init?(coder: NSCoder) {
+	public required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	public func buildScene(){	}
+	open func buildScene(){	}
 
 	public func updateScene(deltaTime: TimeInterval) {
 		if let camera = _camera {
@@ -48,7 +48,7 @@ public class GameScene: GameNode {
 		_meshManager.updateAll(deltaTime: deltaTime)
 	}
 	// doUPdate can be overriden by  subclass to provide a hook to update special component systems before running mesh updater
-	public func doUpdate(deltaTime: TimeInterval){
+	open func doUpdate(deltaTime: TimeInterval){
 		
 	}
 	

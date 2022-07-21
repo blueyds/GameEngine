@@ -33,7 +33,7 @@ public class MeshComponent: GKComponent {
 		createBuffers(instanceCount)
 	}
 	
-	override func didAddToEntity(){
+	public override func didAddToEntity(){
 		if modelConstants.count != 1 {
 			if let node = entity as? GameNode {
 				for _ in 0..<modelConstants.count {

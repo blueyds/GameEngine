@@ -1,6 +1,6 @@
 import MetalKit
 
-public class CustomMesh: Mesh {
+open class CustomMesh: Mesh {
 	private var _vertexBuffer: MTLBuffer!
 	private var _vertices: [Vertex] = []
 	public var vertexCount: Int!{
@@ -12,7 +12,7 @@ public class CustomMesh: Mesh {
 		createVertices()
 		createBuffers(device: device)
 	}
-	public func createVertices() {	}
+	open func createVertices() {	}
 	
 	public func addVertex(position: simd_float3,
 				   color: simd_float4 = simd_float4(1,0,1,1),
@@ -26,7 +26,7 @@ public class CustomMesh: Mesh {
 	public func setInstanceCount(_ count: Int) {
 		instanceCount = count
 	}
-	public func drawPrimitives(_ renderCommandEncoder: MTLRenderCommandEncoder){
+	open func drawPrimitives(_ renderCommandEncoder: MTLRenderCommandEncoder){
 		renderCommandEncoder.setVertexBuffer(_vertexBuffer, offset: 0, index: 0)
 //		renderCommandEncoder.drawPrimitives(type: .triangle,
 //											vertexStart: 0,

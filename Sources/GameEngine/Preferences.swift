@@ -26,7 +26,7 @@ public class Preferences {
 	public let framesPerSEcond: Int = 60
 	// MARK: do we oneed this in the framework
 	
-	public var startingSceneType: SceneManager.Types = .Sandbox
+//	public var startingSceneType: SceneManager.Types = .Sandbox
 	private init(){
 		
 	}

@@ -54,7 +54,7 @@ public class ModelMesh: Mesh {
 		}
 	}
 	
-	func drawPrimitives(_ renderCommandEncoder: MTLRenderCommandEncoder) {
+	public func drawPrimitives(_ renderCommandEncoder: MTLRenderCommandEncoder) {
 		guard let meshes = self._meshes as? [MTKMesh] else {return}
 		for mesh in meshes {
 			for vertexBuffer in mesh.vertexBuffers {
