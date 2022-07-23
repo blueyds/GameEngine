@@ -9,10 +9,10 @@
 
 //import Foundation
 
-@resultBuilder
-public struct GameNodeBuilder {
-	public static func buildBlock(_ components: GameNode...) -> [GameNode] {
-		components
-	}
-}
+//@resultBuilder
+//public struct GameNodeBuilder {
+//	public static func buildBlock(_ components: GameNode...) -> [GameNode] {
+//		components
+//	}
+//}
 
