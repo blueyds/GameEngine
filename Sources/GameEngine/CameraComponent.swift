@@ -69,3 +69,9 @@ public class CameraComponent: GKComponent {
 	
 	
 }
+
+extension GameNode {
+	public var Camera: CameraComponent? {
+		component(ofType: CameraComponent.self)
+	}
+}

@@ -7,8 +7,8 @@
 
 import MetalKit
 
-public final class Engine {
-	public static let shared: Engine = Engine()
+public final class MetalEngine {
+	public static let shared: MetalEngine = MetalEngine()
 	public let device: MTLDevice!
 	public let commandQueue: MTLCommandQueue!
 	public var screenSize = simd_float2(repeating: 0)
@@ -16,10 +16,10 @@ public final class Engine {
 	private let _descriptors: VertexDescriptorLibrary
 //	private let _renderDescriptors: RenderDescriptorLibrary
 	private let _renderStates: RenderPipelineLibrary
-	private let _meshes: Entities
+//	private let _meshes: Entities
 	private let _preferences: Preferences
 	private let _depthStencilStates: DepthStencilStateLibrary
-	private let _textures: TextureLibrary
+//	private let _textures: TextureLibrary
 	private let _samplerStates: SamplerStateLibrary
 	
 	public func Vertex(_ vertexFunctionType: ShaderLibrary.VertexShaderTypes)-> MTLFunction{
@@ -37,17 +37,17 @@ public final class Engine {
 	public func RenderState(_ renderPipelineStateType: RenderPipelineLibrary.Types)-> MTLRenderPipelineState {
 		_renderStates.renderState(renderPipelineStateType)
 	}
-	public func Mesh(_ meshType: Entities.Types)->Mesh {
-		_meshes.mesh(meshType)
-	}
+//	public func Mesh(_ meshType: Entities.Types)->Mesh {
+//		_meshes.mesh(meshType)
+//	}
 	
 	public func DepthStencilStates(_ depthStencilStateType: DepthStencilStateLibrary.Types)-> MTLDepthStencilState {
 		_depthStencilStates.DepthStencilState(depthStencilStateType)
 	}
-	public func Texture(_ textureType: TextureLibrary.Types)-> MTLTexture?{
-		_textures[textureType]
-	}
-	
+//	public func Texture(_ textureType: TextureLibrary.Types)-> MTLTexture?{
+//		_textures[textureType]
+//	}
+//
 	public func SamplerState(_ samplerStateType: SamplerStateLibrary.Types) -> MTLSamplerState{
 		_samplerStates[samplerStateType]
 	}
@@ -64,9 +64,9 @@ public final class Engine {
 		self._shaders = ShaderLibrary(device: self.device)
 		self._descriptors = VertexDescriptorLibrary()
 		self._renderStates = RenderPipelineLibrary(device: device, library: _shaders, vertexDescriptorLibrary: _descriptors, preferences: _preferences)
-		self._meshes = Entities(device: device, vertexDescriptorLibrary: self._descriptors)
+//		self._meshes = Entities(device: device, vertexDescriptorLibrary: self._descriptors)
 		self._depthStencilStates = DepthStencilStateLibrary(device: device)
-		self._textures = TextureLibrary(device: device)
+//		self._textures = TextureLibrary(device: device)
 		self._samplerStates = SamplerStateLibrary(device: device)
 	}
 }

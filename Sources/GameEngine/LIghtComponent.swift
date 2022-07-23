@@ -68,3 +68,9 @@ extension LightComponent {
 		lightData.specularIntensity
 	}
 }
+
+extension GameNode {
+	public var Light: LightComponent? {
+		component(ofType: LightComponent.self)
+	}
+}

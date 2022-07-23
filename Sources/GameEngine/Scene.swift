@@ -19,6 +19,8 @@ open class GameScene: GameNode {
 	// var camera = DebugCamera()
 	public init(){
 		super.init(name: "Scene")
+		self.root = self
+		self.parent = self
 		buildScene()
 		print(self)
 	}
@@ -61,13 +63,13 @@ open class GameScene: GameNode {
 }
 // mesh extensions for the scene
 extension GameScene {
-	public func addMeshComponent(_ meshType: Entities.Types, toChild: GameNode){
-		let component = MeshComponent(meshType: meshType)
+	public func addMeshComponent(_ mesh: Mesh, toChild: GameNode){
+		let component = MeshComponent(mesh: mesh)
 		toChild.addComponent(component)
 		_meshManager.addComponent(foundIn: toChild)
 	}
-	public func addMeshComponent(_ meshType: Entities.Types, toChild: GameNode, instanceCount: Int){
-		let component = MeshComponent(meshType: meshType, instanceCount: instanceCount)
+	public func addMeshComponent(_ mesh: Mesh, toChild: GameNode, instanceCount: Int){
+		let component = MeshComponent(mesh: mesh, instanceCount: instanceCount)
 		toChild.addComponent(component)
 		_meshManager.addComponent(foundIn: toChild)
 	}
@@ -108,4 +110,9 @@ extension GameScene {
 	}
 }
 
+extension GameNode {
+	public var Scene: GameScene? {
+		self.root as? GameScene
+	}
+}
 

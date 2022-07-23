@@ -12,7 +12,6 @@ public class MeshManager {
 	var _components: GKComponentSystem<MeshComponent>
 	public init (){
 		_components = GKComponentSystem<MeshComponent>(componentClass: MeshComponent.self)
-		
 	}
 	public func updateAll(deltaTime: TimeInterval){
 		_components.update(deltaTime: deltaTime)

@@ -10,13 +10,15 @@ import GameplayKit
 open class GameNode: GKEntity, Identifiable{
 	private var _name: String
 	public let id = UUID()
-	
+	public weak var parent: GameNode?
+	public weak var root: GameNode?
+
 	private var _position: simd_float3 = simd_float3(repeating: 0)
 	private var _scale: simd_float3 = simd_float3(repeating: 1)
 	private var _rotation: simd_float3 = simd_float3(repeating: 0)
 	
-	public var parentModelMatrix = matrix_identity_float4x4
-	public var modelMatrix : matrix_float4x4 {
+	 var parentModelMatrix = matrix_identity_float4x4
+	var modelMatrix : matrix_float4x4 {
 		var matrix = matrix_identity_float4x4
 		matrix.translate(direction: _position)
 		matrix.scale(axis: _scale)
@@ -28,8 +30,10 @@ open class GameNode: GKEntity, Identifiable{
 	}
 	public var children: [GameNode] = []
 	
-	public init(name: String){
+	public init(name: String, parent: GameNode? = nil){
 		self._name = name
+		self.parent = parent
+		self.root = parent?.root
 		super.init()
 	}
 	
@@ -38,16 +42,19 @@ open class GameNode: GKEntity, Identifiable{
 	}
 	public func addChild(_ child: GameNode){
 		children.append(child)
+		child.parent = self
+		
 	}
 	
 	
-	public func updateChildrenMatrix(){
+	func updateChildrenMatrix(){
 //		if let updateable = self as? Updateable {
 //			updateable.doUpdate(GameTime.DeltaTime)
 //		}
 		for child in children {
 			child.parentModelMatrix = self.modelMatrix
 			child.updateChildrenMatrix()
+
 		}
 	}
 	

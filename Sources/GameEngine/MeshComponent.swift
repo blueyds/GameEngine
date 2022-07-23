@@ -9,23 +9,23 @@ import MetalKit
 import GameplayKit
 
 public class MeshComponent: GKComponent {
-	public var modelConstants: [ModelConstants] = []
-	public var material = Material()
-	var _textureType: TextureLibrary.Types = .None
-	public var mesh: Mesh!
-	public var renderState: RenderPipelineLibrary.Types
-	public var depthStencilStates = Engine.shared.DepthStencilStates(.Less)
-	public var samplerState = Engine.shared.SamplerState(.Linear)
+	var modelConstants: [ModelConstants] = []
+	var material = Material()
+	var _texture: Texture?
+	var mesh: Mesh!
+	var renderState: RenderPipelineLibrary.Types
+	var depthStencilStates = MetalEngine.shared.DepthStencilStates(.Less)
+	var samplerState = MetalEngine.shared.SamplerState(.Linear)
 	private var _modelConstantBuffer: MTLBuffer!
 	
-	public init (meshType: Entities.Types) {
-		mesh = Engine.shared.Mesh(meshType)
+	public init (mesh: Mesh) {
+		self.mesh = mesh
 		modelConstants.append(ModelConstants())
 		renderState = .Basic
 		super.init()
 	}
-	public init(meshType: Entities.Types, instanceCount: Int){
-		mesh = Engine.shared.Mesh(meshType)
+	public init(mesh: Mesh, instanceCount: Int){
+		self.mesh = mesh
 		mesh.setInstanceCount(instanceCount)
 		renderState = .Instanced
 		super.init()
@@ -43,13 +43,14 @@ public class MeshComponent: GKComponent {
 		}
 		
 	}
+	
 	func createModelConstants(_ instanceCount: Int){
 		for _ in 0..<instanceCount {
 			modelConstants.append(ModelConstants())
 		}
 	}
 	func createBuffers(_ instanceCount: Int){
-		_modelConstantBuffer = Engine.shared.device.makeBuffer(length: ModelConstants.stride(instanceCount), options: [])
+		_modelConstantBuffer = MetalEngine.shared.device.makeBuffer(length: ModelConstants.stride(instanceCount), options: [])
 	}
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
@@ -76,7 +77,7 @@ public class MeshComponent: GKComponent {
 	}
 	
 	public func doRender(_ renderCommandEncoder: MTLRenderCommandEncoder) {
-		renderCommandEncoder.setRenderPipelineState(Engine.shared.RenderState(renderState))
+		renderCommandEncoder.setRenderPipelineState(MetalEngine.shared.RenderState(renderState))
 		renderCommandEncoder.setDepthStencilState(depthStencilStates)
 		
 		//Vertex Shader
@@ -91,7 +92,7 @@ public class MeshComponent: GKComponent {
 		renderCommandEncoder.setFragmentSamplerState(samplerState, index: 0)
 		renderCommandEncoder.setFragmentBytes(&material, length: Material.stride, index: 1)
 		if(material.useTexture){
-			renderCommandEncoder.setFragmentTexture(Engine.shared.Texture(_textureType), index: 0)
+			renderCommandEncoder.setFragmentTexture(_texture!.texture, index: 0)
 		}
 		mesh.drawPrimitives(renderCommandEncoder)
 	}
@@ -109,10 +110,10 @@ extension MeshComponent {
 		setMaterialColor(simd_float4(r,g,b,1))
 	}
 	
-	public func setTexture(_ textureType: TextureLibrary.Types){
+	public func setTexture(_ texture: Texture){
 		self.material.useTexture = true
 		self.material.useMaterialColor = false
-		self._textureType = textureType
+		self._texture = texture
 	}
 	// is lit
 	public func setMaterialIsLit(_ isLit: Bool) {
@@ -180,3 +181,9 @@ extension MeshComponent {
 		material.shininess
 	}
  }
+
+extension GameNode {
+	public var Mesh: MeshComponent? {
+		component(ofType: MeshComponent.self)
+	}
+}
