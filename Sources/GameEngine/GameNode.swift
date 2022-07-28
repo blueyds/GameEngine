@@ -45,12 +45,12 @@ open class GameNode: GKEntity, Identifiable{
 		child.parent = self
 		
 	}
-	
+	open func doUpdate(deltaTime: TimeInterval){
+
+	}
+
 	
 	func updateChildrenMatrix(){
-//		if let updateable = self as? Updateable {
-//			updateable.doUpdate(GameTime.DeltaTime)
-//		}
 		for child in children {
 			child.parentModelMatrix = self.modelMatrix
 			child.updateChildrenMatrix()

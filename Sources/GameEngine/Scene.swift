@@ -41,18 +41,20 @@ open class GameScene: GameNode {
 		}
 		_sceneConstants.totalGameTime = Float(deltaTime)
 
-		updateChildrenMatrix()
-		_meshManager.updateAll(deltaTime: deltaTime)
-		_lightManager.updateAll(deltaTime: deltaTime)
-		
+
 		doUpdate(deltaTime: deltaTime)
-		children.forEach(){ $0.update(deltaTime: deltaTime)	}
+		//print(children.count)
+
+		children.forEach(){
+			$0.doUpdate(deltaTime: deltaTime) //finally this performs any specialized update functions on that node
+			$0.update(deltaTime: deltaTime) // this updates all random components
+
+		}
+		updateChildrenMatrix()
+		_lightManager.updateAll(deltaTime: deltaTime)
 		_meshManager.updateAll(deltaTime: deltaTime)
 	}
 	// doUPdate can be overriden by  subclass to provide a hook to update special component systems before running mesh updater
-	open func doUpdate(deltaTime: TimeInterval){
-		
-	}
 	
 	public func render(renderCommandEncoder: MTLRenderCommandEncoder) {
 		

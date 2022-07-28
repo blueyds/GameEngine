@@ -13,6 +13,9 @@ public class Keyboard {
 	public static func SetKeyPressed(_ keyCode: UInt16, isOn: Bool){
 		keys[Int(keyCode)] = isOn
 	}
+	public static func ToggleKeyPressed(_ keyCode: UInt16){
+		keys[Int(keyCode)].toggle()
+	}
 	public static func IsKeyPressed(_ keyCode: KeyCodes)-> Bool{
 		return keys[Int(keyCode.rawValue)]
 	}
