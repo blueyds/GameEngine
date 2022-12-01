@@ -26,7 +26,9 @@ let package = Package(
             dependencies: [],
 			resources: [
 				.process("Metal/BasicShaders.metal"),
-				.process("Metal/InstancedShaders.metal")
+				.process("Metal/InstancedShaders.metal"),
+				.process("Metal/Lighting.metal"),
+				.process("Metal/Shared.metal")
 			]),
         .testTarget(
             name: "GameEngineTests",
