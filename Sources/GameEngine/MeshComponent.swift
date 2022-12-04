@@ -7,8 +7,7 @@
 
 import MetalKit
 import GameplayKit
-import MetalEngine
-import GameObjects
+
 
 public class MeshComponent: GKComponent {
 	var modelConstants: [ModelConstants] = []

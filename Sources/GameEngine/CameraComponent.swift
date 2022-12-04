@@ -6,7 +6,7 @@
 //
 import MetalKit
 import GameplayKit
-import GameObjects
+
 
 public class CameraComponent: GKComponent {
 	var cameraName: String

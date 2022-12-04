@@ -11,34 +11,11 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library( name: "GameEngine", targets: [
-			"MetalEngine",
-			"GameObjects",
-			"GameUtilities",
-			"GameInput",
-			"GameMeshes",
-			"GameScene",
-			"GameComponents"])   ],
+			"GameEngine"])   ],
     dependencies: [],
     targets: [
-        .target(name: "MetalEngine"),
-		.target(name: "GameObjects",
-				dependencies: ["GameUtilities"]),
-		.target(name: "GameUtilities"),
-		.target(name: "GameInput"),
-		.target(name: "GameMeshes",
-				dependencies: [
-					"MetalEngine",
-					"GameObjects",
-					"GameComponents"]),
-		.target(name: "GameComponents",
-				dependencies: ["GameObjects"]),
-		.target(name: "GameScene",
-				dependencies: [
-					"GameObjects",
-					"GameMeshes",
-					"GameComponents",
-					"MetalEngine"]),
+        .target(name: "GameEngine"),
         .testTarget( name: "GameEngineTests",
-					 dependencies: ["MetalEngine"])
+					 dependencies: ["GameEngine"])
     ]
 )
