@@ -8,6 +8,11 @@
 import MetalKit
 import GameplayKit
 
+import GameMeshes
+import GameObjects
+import GameComponents
+import MetalEngine
+
 open class GameScene: GameNode {
 	
 	public var _meshManager = MeshManager()
@@ -96,8 +101,8 @@ extension GameScene {
 
 // camera extensions for the scene
 extension GameScene {
-	public func addCameraComponent(toChild: GameNode,cameraType: CameraComponent.Types, fov: Float, aspectRatio: Float, near: Float, far: Float){
-		let component = CameraComponent(cameraType: cameraType, fov: fov, aspectRatio: aspectRatio, near: near, far: far)
+	public func addCameraComponent(toChild: GameNode, named name: String, fov: Float, aspectRatio: Float, near: Float, far: Float){
+		let component = CameraComponent(named: name, fov: fov, aspectRatio: aspectRatio, near: near, far: far)
 		toChild.addComponent(component)
 		if _camera != nil {
 			if let node = _camera?.entity as? GameNode {

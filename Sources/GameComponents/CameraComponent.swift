@@ -6,14 +6,12 @@
 //
 import MetalKit
 import GameplayKit
+import GameObjects
 
 public class CameraComponent: GKComponent {
-	public enum Types {
-		case Debug
-	}
-	var cameraType: Types!
+	var cameraName: String
 	
-	var viewMatrix: matrix_float4x4 {
+	public var viewMatrix: matrix_float4x4 {
 		var viewMatrix = matrix_identity_float4x4
 		
 		if let node = entity as? GameNode {
@@ -33,15 +31,15 @@ public class CameraComponent: GKComponent {
 	private var _far: Float
 
 	
-	var projectionMatrix: matrix_float4x4 {
+	public var projectionMatrix: matrix_float4x4 {
 		return matrix_float4x4.perspective(degreesFov: _fov,
 										   aspectRatio: _aspectRation,
 										   near: _near,
 										   far: _far)
 	}
 	
-	public init(cameraType: Types, fov: Float, aspectRatio: Float, near: Float, far: Float){
-		self.cameraType = cameraType
+	public init(named cameraType: String, fov: Float, aspectRatio: Float, near: Float, far: Float){
+		self.cameraName = cameraType
 		self._fov = fov
 		self._aspectRation = aspectRatio
 		self._near = near

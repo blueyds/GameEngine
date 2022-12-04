@@ -7,6 +7,7 @@
 
 import MetalKit
 import GameplayKit
+//import GameObjects
 public class LightManager {
 	//private var _lightObjects: [LightObject] = []
 	var _components = GKComponentSystem<LightComponent>()
@@ -33,11 +34,11 @@ public class LightManager {
 		_components.update(deltaTime: deltaTime)
 	}
 	
-	public func addComponent(foundIn fromNode: GameNode){
+	public func addComponent(foundIn fromNode: GKEntity){
 		_components.addComponent(foundIn: fromNode)
 		print("Light system has \(_components.components.count) lights")
 	}
-	public func removeComponent(foundIn fromNode: GameNode){
+	public func removeComponent(foundIn fromNode: GKEntity){
 		_components.removeComponent(foundIn: fromNode)
 	}
 }

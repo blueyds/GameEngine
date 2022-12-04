@@ -52,10 +52,23 @@ public struct Vertex: sizeable {
 	public var color: simd_float4
 	public var textureCoordinate: simd_float2
 	public var normal: simd_float3
+	public init(position: simd_float3,
+				color: simd_float4,
+				textureCoordinate: simd_float2,
+				normal: simd_float3){
+		self.position = position
+		self.color = color
+		self.textureCoordinate = textureCoordinate
+		self.normal = normal
+	}
+
 }
 
 public struct ModelConstants: sizeable {
 	public var modelMatrix = matrix_identity_float4x4
+	public init(){
+		modelMatrix = matrix_identity_float4x4
+	}
 }
 
 public struct SceneConstants:sizeable {
@@ -63,6 +76,12 @@ public struct SceneConstants:sizeable {
 	public var viewMatrix = matrix_identity_float4x4
 	public var projectionMatrix = matrix_identity_float4x4
 	public var cameraPosition: simd_float3 = simd_float3(repeating: 0)
+	public init(){
+		totalGameTime = 0
+		viewMatrix = matrix_identity_float4x4
+		projectionMatrix = matrix_identity_float4x4
+		cameraPosition = simd_float3(repeating: 0)
+	}
 }
 
 public struct Material: sizeable {
@@ -74,13 +93,15 @@ public struct Material: sizeable {
 	public var diffuse: simd_float3 = simd_float3(repeating: 1)
 	public var specular: simd_float3 = simd_float3(repeating: 1)
 	public var shininess: Float = 50
+	public init(){
+		color = simd_float4(0, 0, 0, 1)
+		useMaterialColor = false
+		useTexture = false
+		isLit = true
+		ambient = simd_float3(repeating: 0.1)
+		diffuse = simd_float3(repeating: 1)
+		specular = simd_float3(repeating: 1)
+		shininess = 50
+	}
 }
 
-public struct LightData: sizeable {
-	public var position: simd_float3 = simd_float3(0, 0, 0)
-	public var color: simd_float3 = simd_float3(1, 1, 1)
-	public var brightness: Float = 1.0
-	public var ambientIntensity: Float = 1.0
-	public var diffuseIntensity: Float = 1.0
-	public var specularIntensity: Float = 1.0
-}

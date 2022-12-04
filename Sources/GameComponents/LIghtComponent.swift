@@ -7,6 +7,7 @@
 
 import MetalKit
 import GameplayKit
+import GameObjects
 
 public class LightComponent: GKComponent {
 	public var lightData: LightData = LightData()

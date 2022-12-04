@@ -7,27 +7,40 @@
 
 import MetalKit
 import GameplayKit
+import MetalEngine
+import GameObjects
 
 public class MeshComponent: GKComponent {
 	var modelConstants: [ModelConstants] = []
-	var material = Material()
+	var material: Material = Material()
 	var _texture: Texture?
 	var mesh: Mesh!
-	var renderState: RenderPipelineLibrary.Types
-	var depthStencilStates = MetalEngine.shared.DepthStencilStates(.Less)
-	var samplerState = MetalEngine.shared.SamplerState(.Linear)
+	static var Engine: EngineProtocol? = nil
 	private var _modelConstantBuffer: MTLBuffer!
+	var renderState: MTLRenderPipelineState
+	var depthStencilState: MTLDepthStencilState
+	var samplerState: MTLSamplerState
 	
 	public init (mesh: Mesh) {
 		self.mesh = mesh
 		modelConstants.append(ModelConstants())
-		renderState = .Basic
+		if MeshComponent.Engine == nil {
+			fatalError("Set MeshComponent.engine prior to initializing any meshes")
+		}
+		renderState = MeshComponent.Engine!.defaultBasicRenderState
+		depthStencilState = MeshComponent.Engine!.defaultDepthStencilState
+		samplerState = MeshComponent.Engine!.defaultSamplerState
 		super.init()
 	}
 	public init(mesh: Mesh, instanceCount: Int){
 		self.mesh = mesh
 		mesh.setInstanceCount(instanceCount)
-		renderState = .Instanced
+		if MeshComponent.Engine == nil {
+			fatalError("Set MeshComponent.engine prior to initializing any meshes")
+		}
+		renderState = MeshComponent.Engine!.defaultInstancedRenderState
+		depthStencilState = MeshComponent.Engine!.defaultDepthStencilState
+		samplerState = MeshComponent.Engine!.defaultSamplerState
 		super.init()
 		createModelConstants(instanceCount)
 		createBuffers(instanceCount)
@@ -50,7 +63,7 @@ public class MeshComponent: GKComponent {
 		}
 	}
 	func createBuffers(_ instanceCount: Int){
-		_modelConstantBuffer = MetalEngine.shared.device.makeBuffer(length: ModelConstants.stride(instanceCount), options: [])
+		_modelConstantBuffer = MeshComponent.Engine?.device.makeBuffer(length: ModelConstants.stride(instanceCount), options: [])
 	}
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
@@ -77,8 +90,8 @@ public class MeshComponent: GKComponent {
 	}
 	
 	public func doRender(_ renderCommandEncoder: MTLRenderCommandEncoder) {
-		renderCommandEncoder.setRenderPipelineState(MetalEngine.shared.RenderState(renderState))
-		renderCommandEncoder.setDepthStencilState(depthStencilStates)
+		renderCommandEncoder.setRenderPipelineState(renderState)
+		renderCommandEncoder.setDepthStencilState(depthStencilState)
 		
 		//Vertex Shader
 		if modelConstants.count == 1 {
@@ -181,9 +194,9 @@ extension MeshComponent {
 		material.shininess
 	}
  }
-
 extension GameNode {
 	public var Mesh: MeshComponent? {
 		component(ofType: MeshComponent.self)
 	}
 }
+

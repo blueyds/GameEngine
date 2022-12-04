@@ -13,20 +13,20 @@ public class SamplerStateLibrary {
 		case None
 		case Linear
 	}
-	private var _states: [Types : SamplerState]=[:]
+	private var _states: [SamplerState]=[]
 	private var _device: MTLDevice
 	public init(device: MTLDevice){
 		_device = device
 		createdefaultSamplers()
 	}
 	private func createdefaultSamplers(){
-		addSampler("Linear Sampler State", minFilter: .linear, magFilter: .linear, forKey: .Linear)
+		addSampler(named: "Linear Sampler State", minFilter: .linear, magFilter: .linear)
 	}
-	private func addSampler(_ name: String, minFilter: MTLSamplerMinMagFilter, magFilter: MTLSamplerMinMagFilter, forKey: Types){
-		_states.updateValue(SamplerState(name, minFilter: minFilter, magFilter: magFilter, device: _device), forKey: forKey)
+	public func addSampler(named name: String, minFilter: MTLSamplerMinMagFilter, magFilter: MTLSamplerMinMagFilter){
+		_states.append(SamplerState(name, minFilter: minFilter, magFilter: magFilter, device: _device) )
 	}
-	public subscript(_ type: Types) -> MTLSamplerState {
-		(_states[type]?.samplerState)!
+	public subscript(_ name: String) -> MTLSamplerState? {
+		_states.first(where: {$0.name == name})?.samplerState
 	}
 }
 

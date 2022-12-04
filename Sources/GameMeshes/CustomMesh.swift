@@ -1,4 +1,5 @@
 import MetalKit
+import MetalEngine
 
 open class CustomMesh: Mesh {
 	private var _vertexBuffer: MTLBuffer!
@@ -28,13 +29,16 @@ open class CustomMesh: Mesh {
 	}
 	open func drawPrimitives(_ renderCommandEncoder: MTLRenderCommandEncoder){
 		renderCommandEncoder.setVertexBuffer(_vertexBuffer, offset: 0, index: 0)
-//		renderCommandEncoder.drawPrimitives(type: .triangle,
-//											vertexStart: 0,
-//											vertexCount: vertexCount)
-		renderCommandEncoder.drawPrimitives(type: .triangle,
-											vertexStart: 0,
-											vertexCount: vertexCount,
-											instanceCount: instanceCount)
+		if instanceCount == 1 {
+			renderCommandEncoder.drawPrimitives(type: .triangle,
+												vertexStart: 0,
+												vertexCount: vertexCount)
+		} else {
+			renderCommandEncoder.drawPrimitives(type: .triangle,
+												vertexStart: 0,
+												vertexCount: vertexCount,
+												instanceCount: instanceCount)
+		}
 	}
 	
 }

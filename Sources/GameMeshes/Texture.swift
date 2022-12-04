@@ -35,7 +35,7 @@ import MetalKit
 public class Texture {
 	var texture: MTLTexture!
 	
-	public init(name: String, ext: String = "png", origin: MTKTextureLoader.Origin = .topLeft, device: MTLDevice = MetalEngine.shared.device){
+	public init(name: String, ext: String = "png", origin: MTKTextureLoader.Origin = .topLeft, device: MTLDevice){
 		let textureLoader = TextureLoader(textureName: name, textureExtension: ext, origin: origin, device: device)
 		let texture: MTLTexture = textureLoader.loadTextureFromBundle()
 		setTexture(texture)

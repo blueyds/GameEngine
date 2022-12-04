@@ -14,11 +14,13 @@ public class ModelMesh: Mesh {
 	public var vertexCount: Int!
 	
 	public init(modelName: String,
-		 ext: String = "obj",
-				vertexDescriptor: VertexDescriptorLibrary.Types = .Basic){
+				ext: String = "obj",
+				vertexDescriptor: MTLVertexDescriptor,
+				device: MTLDevice){
 		loadModel(modelName: modelName,
 				  ext: ext,
-				  vertexDescriptor: vertexDescriptor)
+				  vertexDescriptor: vertexDescriptor,
+				  device: device)
 	}
 	
 	var instanceCount: Int = 1
@@ -28,24 +30,24 @@ public class ModelMesh: Mesh {
 	
 	private func loadModel(modelName:String,
 						   ext: String,
-						   vertexDescriptor: VertexDescriptorLibrary.Types){
-		let engine = MetalEngine.shared
+						   vertexDescriptor: MTLVertexDescriptor,
+						   device: MTLDevice){
 		guard let assetUrl = Bundle.main.url(forResource: modelName, withExtension: ext) else {
 			fatalError("Asset \(modelName) does not exist")
 		}
-		let descriptor = MTKModelIOVertexDescriptorFromMetal(engine.Descriptor(vertexDescriptor))
+		let descriptor = MTKModelIOVertexDescriptorFromMetal(vertexDescriptor)
 		(descriptor.attributes[0] as! MDLVertexAttribute).name = MDLVertexAttributePosition
 		(descriptor.attributes[1] as! MDLVertexAttribute).name = MDLVertexAttributeColor
 		(descriptor.attributes[2] as! MDLVertexAttribute).name = MDLVertexAttributeTextureCoordinate
 		(descriptor.attributes[3] as! MDLVertexAttribute).name = MDLVertexAttributeNormal
 		
 		
-		let bufferAllocator = MTKMeshBufferAllocator(device: engine.device)
+		let bufferAllocator = MTKMeshBufferAllocator(device: device)
 		let asset: MDLAsset = MDLAsset(url: assetUrl,
 									   vertexDescriptor: descriptor,
 									   bufferAllocator: bufferAllocator)
 		do{
-			self._meshes = try MTKMesh.newMeshes(asset: asset, device: engine.device).metalKitMeshes
+			self._meshes = try MTKMesh.newMeshes(asset: asset, device: device).metalKitMeshes
 		} catch {
 			print("ERROR::LOADING_MESH::__\(modelName)__\(error)")
 		}

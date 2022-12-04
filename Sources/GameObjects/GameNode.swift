@@ -7,6 +7,10 @@
 
 import MetalKit
 import GameplayKit
+import GameUtilities
+//import GameMeshes
+//import GameComponents
+
 open class GameNode: GKEntity, Identifiable{
 	private var _name: String
 	public let id = UUID()
@@ -17,8 +21,8 @@ open class GameNode: GKEntity, Identifiable{
 	private var _scale: simd_float3 = simd_float3(repeating: 1)
 	private var _rotation: simd_float3 = simd_float3(repeating: 0)
 	
-	 var parentModelMatrix = matrix_identity_float4x4
-	var modelMatrix : matrix_float4x4 {
+	 public var parentModelMatrix = matrix_identity_float4x4
+	 public var modelMatrix : matrix_float4x4 {
 		var matrix = matrix_identity_float4x4
 		matrix.translate(direction: _position)
 		matrix.scale(axis: _scale)
@@ -50,7 +54,7 @@ open class GameNode: GKEntity, Identifiable{
 	}
 
 	
-	func updateChildrenMatrix(){
+	public func updateChildrenMatrix(){
 		for child in children {
 			child.parentModelMatrix = self.modelMatrix
 			child.updateChildrenMatrix()
@@ -110,6 +114,7 @@ extension GameNode {
 	public func scaleY(_ delta: Float){ self._scale.y += delta }
 	public func scaleZ(_ delta: Float){ self._scale.z += delta }
 }
+
 
 //// Mesh Extensions
 //extension  Node {

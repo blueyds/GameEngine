@@ -7,6 +7,8 @@
 
 import MetalKit
 import GameplayKit
+import GameObjects
+
 
 public class MeshManager {
 	var _components: GKComponentSystem<MeshComponent>
@@ -25,11 +27,11 @@ public class MeshManager {
 			}
 		}
 	}
-	public func addComponent(foundIn fromNode: GameNode) {
+	public func addComponent(foundIn fromNode: GKEntity) {
 		_components.addComponent(foundIn: fromNode)
 		print("WE now have \(_components.components.count) meshes in our meshManager")
 	}
-	public func removeComponent(foundIn fromNode: GameNode){
+	public func removeComponent(foundIn fromNode: GKEntity){
 		
 		_components.removeComponent(foundIn: fromNode)
 	}

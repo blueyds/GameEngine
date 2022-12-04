@@ -1,5 +1,5 @@
 import XCTest
-@testable import GameEngine
+@testable import MetalEngine
 
 final class GameEngineTests: XCTestCase {
     func testExample() throws {

@@ -9,19 +9,20 @@ import MetalKit
 
 
 public class VertexDescriptorLibrary {
-	public enum Types {
-		case Basic
-	}
 
-	private var vertexDescriptors: [Types: VertexDescriptor] = [:]
+
+	private var vertexDescriptors: [ VertexDescriptor] = []
 	public init () {
 		createDefaultVertexDescriptors()
 	}
 	private func createDefaultVertexDescriptors(){
 		createBasic()
 	}
-	public func descriptor(_ vertexDescriptorType: Types) -> MTLVertexDescriptor {
-		vertexDescriptors[vertexDescriptorType]!.vertexDescriptor
+	public func add(vertexDescriptor: VertexDescriptor){
+		vertexDescriptors.append(vertexDescriptor)
+	}
+	public subscript(name: String) -> MTLVertexDescriptor? {
+		vertexDescriptors.first(where: { $0.name == name })?.vertexDescriptor
 	}
 	private func createBasic(){
 		let basic = VertexDescriptor(name: "Basic Vertex Descriptor")
@@ -35,7 +36,7 @@ public class VertexDescriptorLibrary {
 		basic.addAttribute(position: 3, format: .float3, offset: simd_float3.size + simd_float4.size + simd_float2.size, bufferIndex: 0)
 		// layout
 		basic.addLayout(stride: Vertex.stride)
-		vertexDescriptors.updateValue(basic, forKey: .Basic)
+		add(vertexDescriptor: basic)
 	}
 }
 
