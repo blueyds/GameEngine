@@ -22,7 +22,7 @@ public class DepthStencilStateLibrary {
 	}
 	
 	private func createDefaultDepthStencilStates(){
-		add(depthStencilState: DepthStencilState(device: device, isDepthWriteEnabled: true, depthCompareFunction: .less), named: "Less")
+//		add(depthStencilState: DepthStencilState(device: device, isDepthWriteEnabled: true, depthCompareFunction: .less), named: "Less")
 	}
 	public func add(depthStencilState: DepthStencilState, named: String){
 		_depthStencilStates.updateValue(depthStencilState, forKey: named)
