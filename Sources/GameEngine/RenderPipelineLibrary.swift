@@ -11,13 +11,13 @@ public class RenderPipelineLibrary {
 	public init(device: MTLDevice){
 		self._device = device
 	}
-	subscript(name: String)->MTLRenderPipelineState?{
+	public subscript(name: String)->MTLRenderPipelineState?{
 		_renderPipelineStates.first(where: {$0.name == name })?.state
 	}
 	public func addState(named name: String,
 						   renderDescriptor: MTLRenderPipelineDescriptor) {
 		do{
-			let rps = try _engine.device.makeRenderPipelineState(descriptor: renderDescriptor)
+			let rps = try _device.makeRenderPipelineState(descriptor: renderDescriptor)
 			let renderState = RenderPipelineState(name: name, state: rps)
 			_renderPipelineStates.append(renderState)
 

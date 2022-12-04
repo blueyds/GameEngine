@@ -43,7 +43,7 @@ public class ShaderLibrary {
 				   ofType: .fragment,
 				  library: library) )
 	}
-	subscript(name: String) -> MTLFunction? {
+	public subscript(name: String) -> MTLFunction? {
 		shaders.first(where: {$0.name == name})?.function
 	}
 
