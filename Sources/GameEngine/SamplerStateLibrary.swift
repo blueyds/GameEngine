@@ -13,32 +13,28 @@ public class SamplerStateLibrary {
 		case None
 		case Linear
 	}
-	private var _states: [SamplerState]=[]
+	private var _states: [String: MTLSamplerState]=[:]
 	private var _device: MTLDevice
 	public init(device: MTLDevice){
 		_device = device
 		createdefaultSamplers()
 	}
 	private func createdefaultSamplers(){
-		addSampler(named: "Linear Sampler State", minFilter: .linear, magFilter: .linear)
+	//	addSampler(named: "Linear Sampler State", minFilter: .linear, magFilter: .linear)
 	}
 	public func addSampler(named name: String, minFilter: MTLSamplerMinMagFilter, magFilter: MTLSamplerMinMagFilter){
-		_states.append(SamplerState(name, minFilter: minFilter, magFilter: magFilter, device: _device) )
+		_states.updateValue(createSamplerState(name: name, minFilter: minFilter, magFilter: magFilter),forKey: name )
 	}
 	public subscript(_ name: String) -> MTLSamplerState? {
-		_states.first(where: {$0.name == name})?.samplerState
+		_states[name]
 	}
-}
-
-public class SamplerState{
-	public var name: String
-	public var samplerState: MTLSamplerState
-	public init(_ name: String, minFilter: MTLSamplerMinMagFilter = .linear, magFilter: MTLSamplerMinMagFilter = .linear, device: MTLDevice){
-		self.name = name
+	private func createSamplerState(name: String, minFilter: MTLSamplerMinMagFilter, magFilter: MTLSamplerMinMagFilter)->MTLSamplerState{
 		let samplerDescriptor = MTLSamplerDescriptor()
 		samplerDescriptor.minFilter = minFilter
 		samplerDescriptor.magFilter = magFilter
 		samplerDescriptor.label = name
-		samplerState = device.makeSamplerState(descriptor: samplerDescriptor)!
+		return _device.makeSamplerState(descriptor: samplerDescriptor)!
 	}
 }
+
+

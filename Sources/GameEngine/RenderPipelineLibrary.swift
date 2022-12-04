@@ -6,24 +6,24 @@ public class RenderPipelineLibrary {
 //		case Instanced
 //	}
 	private let _device: MTLDevice
-	private var _renderPipelineStates: [ RenderPipelineState] = []
+	private var _renderPipelineStates: [ String : MTLRenderPipelineState] = [:]
 	
 	public init(device: MTLDevice){
 		self._device = device
 	}
 	public subscript(name: String)->MTLRenderPipelineState?{
-		_renderPipelineStates.first(where: {$0.name == name })?.state
+		_renderPipelineStates[name]
 	}
 	public func addState(named name: String,
 						   renderDescriptor: MTLRenderPipelineDescriptor) {
 		do{
-			let rps = try _device.makeRenderPipelineState(descriptor: renderDescriptor)
-			let renderState = RenderPipelineState(name: name, state: rps)
-			_renderPipelineStates.append(renderState)
-
-		}catch let error as NSError {
-			print("ERROR Creating Render Pipeline State for \(name) error = \(error)")
+			let rps = try? _device.makeRenderPipelineState(descriptor: renderDescriptor)
+			//let renderState = RenderPipelineState(name: name, state: rps)
+			_renderPipelineStates.updateValue(rps!, forKey: name)
 		}
+//		}catch let error as NSError {
+//			print("ERROR Creating Render Pipeline State for \(name) error = \(error)")
+//		}
 	}
 	public func addState(named name: String,
 						 pixelFormat: MTLPixelFormat,
@@ -56,12 +56,12 @@ public class RenderPipelineLibrary {
 	}
 	
 }
-
-public class RenderPipelineState{
-	public var name: String
-	public var state: MTLRenderPipelineState
-	public init (name: String, state: MTLRenderPipelineState){
-		self.name = name
-		self.state = state
-	}
-}
+//
+//public class RenderPipelineState{
+//	public var name: String
+//	public var state: MTLRenderPipelineState
+//	public init (name: String, state: MTLRenderPipelineState){
+//		self.name = name
+//		self.state = state
+//	}
+//}
