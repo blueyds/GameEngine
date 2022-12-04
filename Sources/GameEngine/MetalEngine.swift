@@ -14,9 +14,9 @@ public protocol EngineProtocol {
 	var screenSize: simd_float2 { get }
 	var shaders: ShaderLibrary { get }
 	var descriptors: VertexDescriptorLibrary { get }
-	var renderSates: RenderPipelineLibrary { get }
 	var depthStencilStates: DepthStencilStateLibrary { get }
 	var samplerState: SamplerStateLibrary { get }
+	var renderStates: RenderPipelineLibrary { get }
 	var defaultBasicRenderState: MTLRenderPipelineState { get }
 	var defaultInstancedRenderState: MTLRenderPipelineState { get }
 	var defaultDepthStencilState: MTLDepthStencilState { get }
