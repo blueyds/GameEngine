@@ -5,11 +5,11 @@ public class RenderPipelineLibrary {
 //		case Basic
 //		case Instanced
 //	}
-	private let _engine: EngineProtocol
+	private let _device: MTLDevice
 	private var _renderPipelineStates: [ RenderPipelineState] = []
 	
-	public init(engine: EngineProtocol){
-		self._engine = engine
+	public init(device: MTLDevice){
+		self._device = device
 	}
 	subscript(name: String)->MTLRenderPipelineState?{
 		_renderPipelineStates.first(where: {$0.name == name })?.state
@@ -28,30 +28,30 @@ public class RenderPipelineLibrary {
 	public func addState(named name: String,
 						 pixelFormat: MTLPixelFormat,
 						 depthPixelFormat: MTLPixelFormat,
-						 vertexFunction: String,
-						 fragmentFunction: String,
-						 vertexDescriptorType: String){
+						 vertexFunction: MTLFunction,
+						 fragmentFunction: MTLFunction,
+						 vertexDescriptor: MTLVertexDescriptor){
 		addState(named: name,
 				 renderDescriptor: createDescriptor(
 					pixelFormat: pixelFormat,
 					depthPixelFormat: depthPixelFormat,
 					vertexFunction: vertexFunction,
 					fragmentFunction: fragmentFunction,
-					vertexDescriptorType: vertexDescriptorType))
+					vertexDescriptor: vertexDescriptor))
 	}
 	public func createDescriptor(
 	
 		pixelFormat: MTLPixelFormat,
 		depthPixelFormat: MTLPixelFormat,
-		vertexFunction: String,
-		fragmentFunction: String,
-		vertexDescriptorType: String)->MTLRenderPipelineDescriptor!	{
+		vertexFunction: MTLFunction,
+		fragmentFunction: MTLFunction,
+		vertexDescriptor: MTLVertexDescriptor)->MTLRenderPipelineDescriptor!	{
 			let descriptor: MTLRenderPipelineDescriptor! = MTLRenderPipelineDescriptor()
 			descriptor.colorAttachments[0].pixelFormat = pixelFormat
 			descriptor.depthAttachmentPixelFormat = depthPixelFormat
-			descriptor.vertexFunction = _engine.shaders[vertexFunction]!
-			descriptor.fragmentFunction = _engine.shaders[fragmentFunction]!
-			descriptor.vertexDescriptor = _engine.descriptors[vertexDescriptorType]!
+			descriptor.vertexFunction = vertexFunction
+			descriptor.fragmentFunction = fragmentFunction
+			descriptor.vertexDescriptor = vertexDescriptor
 			return descriptor
 	}
 	
