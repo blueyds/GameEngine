@@ -16,14 +16,9 @@ public class RenderPipelineLibrary {
 	}
 	public func addState(named name: String,
 						   renderDescriptor: MTLRenderPipelineDescriptor) {
-		do{
-			let rps = try? _device.makeRenderPipelineState(descriptor: renderDescriptor)
-			//let renderState = RenderPipelineState(name: name, state: rps)
-			_renderPipelineStates.updateValue(rps!, forKey: name)
+		if let rps = _device.makeRenderPipelineState(descriptor: renderDescriptor){
+			_renderPipelineStates.updateValue(rps, forKey: name)
 		}
-//		}catch let error as NSError {
-//			print("ERROR Creating Render Pipeline State for \(name) error = \(error)")
-//		}
 	}
 	public func addState(named name: String,
 						 pixelFormat: MTLPixelFormat,
