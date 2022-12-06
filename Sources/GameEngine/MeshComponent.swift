@@ -14,7 +14,12 @@ public class MeshComponent: GKComponent {
 	var material: Material = Material()
 	var _texture: Texture?
 	var mesh: Mesh!
-	static public var Engine: EngineProtocol? = nil
+	static public var Engine: EngineProtocol? = nil{
+		didSet{
+			CustomMesh.Engine = Engine
+			ModelMesh.Engine = Engine
+		}
+	}
 	private var _modelConstantBuffer: MTLBuffer!
 	var renderState: MTLRenderPipelineState
 	var depthStencilState: MTLDepthStencilState

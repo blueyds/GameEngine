@@ -12,15 +12,17 @@ public class ModelMesh: Mesh {
 	
 	private var _meshes: [Any]!
 	public var vertexCount: Int!
+	static var Engine: EngineProtocol? = nil
 	
 	public init(modelName: String,
 				ext: String = "obj",
-				vertexDescriptor: MTLVertexDescriptor,
-				device: MTLDevice){
+				vertexDescriptor: MTLVertexDescriptor){
+		if ModelMesh.Engine == nil {
+			fatalError("MeshComponent.Enginei should be set before initalizing any Meshes")
+		}
 		loadModel(modelName: modelName,
 				  ext: ext,
-				  vertexDescriptor: vertexDescriptor,
-				  device: device)
+				  vertexDescriptor: vertexDescriptor)
 	}
 	
 	var instanceCount: Int = 1
@@ -30,8 +32,7 @@ public class ModelMesh: Mesh {
 	
 	private func loadModel(modelName:String,
 						   ext: String,
-						   vertexDescriptor: MTLVertexDescriptor,
-						   device: MTLDevice){
+						   vertexDescriptor: MTLVertexDescriptor){
 		guard let assetUrl = Bundle.main.url(forResource: modelName, withExtension: ext) else {
 			fatalError("Asset \(modelName) does not exist")
 		}
@@ -42,12 +43,12 @@ public class ModelMesh: Mesh {
 		(descriptor.attributes[3] as! MDLVertexAttribute).name = MDLVertexAttributeNormal
 		
 		
-		let bufferAllocator = MTKMeshBufferAllocator(device: device)
+		let bufferAllocator = MTKMeshBufferAllocator(device: ModelMesh.Engine!.device)
 		let asset: MDLAsset = MDLAsset(url: assetUrl,
 									   vertexDescriptor: descriptor,
 									   bufferAllocator: bufferAllocator)
 		do{
-			self._meshes = try MTKMesh.newMeshes(asset: asset, device: device).metalKitMeshes
+			self._meshes = try MTKMesh.newMeshes(asset: asset, device: ModelMesh.Engine!.device).metalKitMeshes
 		} catch {
 			print("ERROR::LOADING_MESH::__\(modelName)__\(error)")
 		}

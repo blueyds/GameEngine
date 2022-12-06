@@ -8,10 +8,13 @@ open class CustomMesh: Mesh {
 		_vertices.count
 	}
 	var instanceCount: Int = 1
-	
-	public init(device: MTLDevice!) {
+	static var Engine: EngineProtocol? = nil
+	public init() {
+		if CustomMesh.Engine == nil {
+			fatalError("MeshComponent.Engine should be initialized before any meshes")
+		}
 		createVertices()
-		createBuffers(device: device)
+		createBuffers()
 	}
 	open func createVertices() {	}
 	
@@ -21,8 +24,8 @@ open class CustomMesh: Mesh {
 				   normal: simd_float3 = simd_float3(0,1,0)){
 		_vertices.append(Vertex(position: position, color: color, textureCoordinate: textureCoordinates, normal: normal))
 	}
-	func createBuffers(device: MTLDevice){
-		_vertexBuffer = device.makeBuffer(bytes: _vertices, length: Vertex.stride(_vertices.count) )
+	func createBuffers(){
+		_vertexBuffer = CustomMesh.Engine!.device.makeBuffer(bytes: _vertices, length: Vertex.stride(_vertices.count) )
 	}
 	public func setInstanceCount(_ count: Int) {
 		instanceCount = count

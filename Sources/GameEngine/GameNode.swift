@@ -39,6 +39,9 @@ open class GameNode: GKEntity, Identifiable{
 		self.parent = parent
 		self.root = parent?.root
 		super.init()
+		if parent == nil {
+			self.root = self
+		}
 	}
 	
 	public required init?(coder: NSCoder) {
