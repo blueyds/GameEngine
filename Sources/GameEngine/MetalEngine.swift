@@ -11,7 +11,7 @@ import MetalKit
 public protocol EngineProtocol {
 	var device: MTLDevice! { get }
 	var commandQueue: MTLCommandQueue { get }
-	var screenSize: simd_float2 { get }
+	var screenSize: (height: Float, width: Float) { get }
 	var shaders: ShaderLibrary { get }
 	var descriptors: VertexDescriptorLibrary { get }
 	var depthStencilStates: DepthStencilStateLibrary { get }
