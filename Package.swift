@@ -16,7 +16,7 @@ let package = Package(
     targets: [
         .target(name: "GameEngine",
 				resources: [
-					Resource.copy("Metal Shader Files/*.metal") ] ),
+					Resource.copy("Metal Shader Files/*.txt") ] ),
         .testTarget( name: "GameEngineTests",
 					 dependencies: ["GameEngine"])
     ]
