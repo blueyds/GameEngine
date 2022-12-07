@@ -28,6 +28,14 @@ public class ShaderLibrary {
 		else { fatalError("Could not create library")}
 		self.library = lib
 	}
+	public init(source: String, using device: MTLDevice){
+		self.device = device
+		do{
+			let lib = try self.device.makeLibrary(source: source, options: .none)
+			self.library = lib
+		}catch {fatalError("Could not create library")}
+
+	}
 	public func createVertexShader(_ name: String, functionName: String){
 		shaders.append(
 			Shader(name: name,
