@@ -31,7 +31,7 @@ public class ShaderLibrary {
 	public init(source: String, using device: MTLDevice){
 		self.device = device
 		do{
-			let lib = try self.device.makeLibrary(source: source, options: .none)
+			let lib = try self.device.makeLibrary(source: source, options: nil)
 			self.library = lib
 		}catch {fatalError("Could not create library")}
 
