@@ -70,7 +70,11 @@ extension ShaderLibrary {
 			self.name = name
 			self.functionName = functionName
 			self.fnType = ofType
-			self.function = library.makeFunction(name: functionName)!
+			if let fn = library.makeFunction(name: functionName){
+				self.function = fn	
+			} else {
+				fatalerror("Could not load function named \(functionName)")
+			}
 		}
 	}
 }
