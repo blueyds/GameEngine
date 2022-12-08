@@ -30,11 +30,11 @@ public class ShaderLibrary {
 	}
 	public init(source: String, using device: MTLDevice){
 		self.device = device
-		do{
-			let lib = try self.device.makeLibrary(source: source, options: nil)
+		if let lib = try? self.device.makeLibrary(source: source, options: nil){
 			self.library = lib
-		}catch {fatalError("Could not create library")}
-
+		} else 	{
+		fatalError("Could not create library")
+		}
 	}
 	public func createVertexShader(_ name: String, functionName: String){
 		shaders.append(
