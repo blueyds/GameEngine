@@ -34,6 +34,7 @@ extension simd_float4: sizeable {}
 extension simd_float2: sizeable {}
 extension Float: sizeable {}
 
+
 extension TimeInterval {
  public var Milliseconds: Int{
 	 return Int((self * 1000).rounded())
@@ -44,6 +45,60 @@ extension TimeInterval {
 //	 let v3  = 1 / v2
 //	 return v3
 	 return 1
+	}
+}
+
+
+// Position extensions
+extension simd_float3 {
+	public func moveX(_ delta: Float){ self.x += delta }
+	public func moveY(_ delta: Float){ self.y += delta }
+	public func moveZ(_ delta: Float){ self.z += delta }	
+}
+// Rotation extensions
+extension simd_float3 {
+	public func rotateX(by delta: Float){ self.x += delta }
+	public func rotateY(by delta: Float){ self.y += delta }
+	public func rotateZ(by delta: Float){ self.z += delta }
+}
+// Scale extensions
+extension simd_float3 {
+	public func scaleX(by delta: Float){ self.x += delta }
+	public func scaleY(by delta: Float){ self.y += delta }
+	public func scaleZ(by delta: Float){ self.z += delta }
+}
+// RGB extensions
+extension simd_float3 {
+	var r: Float { 
+		get { self.x }
+		set { self.x = newValue }
+	}
+	var g: Float {
+		get { self.y }
+		set {  self.y = newValue }
+	}
+	var b: Float {
+		get { self.z }
+		set { self.z = newValue }
+	}	
+}
+// RGBA extensions
+extension simd_float4 {
+	var r: Float { 
+		get { self.x }
+		set { self.x = newValue }
+	}
+	var g: Float {
+		get { self.y }
+		set {  self.y = newValue }
+	}
+	var b: Float {
+		get { self.z }
+		set { self.z = newValue }
+	}
+	var a: Float {
+		get { self.w }
+		set { self.w = newValue }
 	}
 }
 
@@ -75,7 +130,7 @@ public struct SceneConstants:sizeable {
 	public var totalGameTime: Float = 0
 	public var viewMatrix = matrix_identity_float4x4
 	public var projectionMatrix = matrix_identity_float4x4
-	public var cameraPosition: simd_float3 = simd_float3(repeating: 0)
+	public var cameraPosition: simd_float3
 	public init(){
 		totalGameTime = 0
 		viewMatrix = matrix_identity_float4x4
@@ -84,24 +139,5 @@ public struct SceneConstants:sizeable {
 	}
 }
 
-public struct Material: sizeable {
-	public var color = simd_float4(0, 0, 0, 1)
-	public var useMaterialColor = false
-	public var useTexture: Bool = false
-	public var isLit: Bool = true
-	public var ambient: simd_float3 = simd_float3(repeating: 0.1)
-	public var diffuse: simd_float3 = simd_float3(repeating: 1)
-	public var specular: simd_float3 = simd_float3(repeating: 1)
-	public var shininess: Float = 50
-	public init(){
-		color = simd_float4(0, 0, 0, 1)
-		useMaterialColor = false
-		useTexture = false
-		isLit = true
-		ambient = simd_float3(repeating: 0.1)
-		diffuse = simd_float3(repeating: 1)
-		specular = simd_float3(repeating: 1)
-		shininess = 50
-	}
-}
+
 

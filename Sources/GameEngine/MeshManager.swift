@@ -21,7 +21,7 @@ public class MeshManager {
 	public func renderAll(rce: MTLRenderCommandEncoder){
 		_components.components.forEach(){
 			if let node = $0.entity as? GameNode {
-				rce.pushDebugGroup(node.getName())
+				rce.pushDebugGroup(node.name)
 				$0.doRender(rce)
 				rce.popDebugGroup()
 			}

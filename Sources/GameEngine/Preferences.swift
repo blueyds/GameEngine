@@ -6,6 +6,8 @@
 //
 
 import MetalKit
+import simd
+
 public protocol MetalPreferences {
 	var clearColor: MTLClearColor { get }
 	var mainPixelFormat: MTLPixelFormat { get }
@@ -18,4 +20,7 @@ public enum MetalClearColors{
 	public static let DarkGrey = MTLClearColor(red: 0.01, green: 0.01, blue: 0.01, alpha: 1)
 	public static let Black = MTLClearColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
 	public static let LimeGreen = MTLClearColor(red: 0.3, green: 0.7, blue: 0.3, alpha: 1)
+}
+public enum Colors{
+	public static let White = simd_float4(r: 1.0, g: 1.0, b: 1.0, a: 1.0)
 }
