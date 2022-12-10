@@ -67,22 +67,22 @@ open class GameNode: GKEntity, Identifiable {
 
 // modifier extensions
 extension GameNode {
-	func position(_ pos: simd_float3) -> GameNode {
+	func setPosition(_ pos: simd_float3) -> GameNode {
 		let result = self
 		result.position = pos
 		return result
 	}
-	func scale(by value: simd_float3) -> GameNode {
+	func setScale(by value: simd_float3) -> GameNode {
 		let result = self
 		result.scale = value
 		return result
 	}
-	func scale(by value: Float) -> GameNode {
+	func setScale(by value: Float) -> GameNode {
 		let result = self
 		result.scale = simd_float3(repeating: value)
 		return result
 	}
-	func rotation(by value: simd_float3) -> GameNode {
+	func setRotation(by value: simd_float3) -> GameNode {
 		let result = self
 		result.rotation = value
 		return result
