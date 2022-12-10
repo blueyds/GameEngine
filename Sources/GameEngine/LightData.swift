@@ -11,7 +11,7 @@ import simd
 
 
 public struct LightData: sizeable {
-	public var position: Position
+	public var position: simd_float3 = simd_float3(repeating: 0)
 	public var color: simd_float3 = simd_float3(1, 1, 1)
 	public var brightness: Float = 1.0
 	public var ambientIntensity: Float = 1.0
