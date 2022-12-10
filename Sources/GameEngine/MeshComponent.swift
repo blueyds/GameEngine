@@ -125,7 +125,50 @@ public class MeshComponent: GKComponent {
 		mesh.drawPrimitives(renderCommandEncoder)
 	}
 }
+// modifier extensions
+extension MeshComponent{
+	func texture(_ texture: Texture) -> MeshComponent{
+		let result = self
+		result.texture = texture
+		return result
+	}
+	func color(_ color: simd_float4)-> MeshComponent{
+		let result = self
+		result.material.color = color
+		return result
 
+	}
+	func ambient(_ color: simd_float3)-> MeshComponent{
+		let result = self
+		result.material.ambient = color
+		return result
+
+	}
+	func diffuse(_ color: simd_float3)-> MeshComponent{
+		let result = self
+		result.material.diffuse = color
+		return result
+
+	}
+	func specular(_ color: simd_float3)-> MeshComponent{
+		let result = self
+		result.material.specular = color
+		return result
+
+	}
+	func shininess(_ value: Float)-> MeshComponent{
+		let result = self
+		result.material.shininess = value
+		return result
+
+	}
+	func isLit(_ value: Bool)-> MeshComponent{
+		let result = self
+		result.material.isLit = value
+		return result
+
+	}
+}
 
 
 extension GameNode {

@@ -28,45 +28,34 @@ public class LightComponent: GKComponent {
 
 extension LightComponent {
 	// Light Color
-	public func setLightColor(_ color: simd_float3){
-		lightData.color = color
-	}
-	public func setLightColor(r: Float, g: Float, b: Float){
-		setLightColor(simd_float3(r, g, b))
-	}
-	public func getLightColor()->simd_float3 {
-		lightData.color
+	public func color(_ color: simd_float3) -> LightComponent {
+		let result = self
+		result.lightData.color = color
+		return result
 	}
 	// Light Brighness
-	public func setLightBrightness(_ brightness: Float){
-		lightData.brightness = brightness
+	public func brightness(_ brightness: Float) -> LightComponent {
+		let result = self
+		result.lightData.brightness = brightness
+		return result
 	}
-	public func getLightBrightness()-> Float {
-		lightData.brightness
-	}
-	
 	// Ambient Intensity
-	public func setLigtAmbientIntensity(_ intensity: Float) {
-		lightData.ambientIntensity = intensity
+	public func ambientIntensity(_ intensity: Float) -> LightComponent {
+		let result = self
+		result.lightData.ambientIntensity = intensity
+		return result
 	}
-	public func getLightAmbientIntensity()-> Float {
-		lightData.ambientIntensity
+		// Diffuse Intensity
+	public func diffuseIntensity(_ intensity: Float) -> LightComponent {
+		let result = self
+		result.lightData.diffuseIntensity = intensity
+		return result
 	}
-	
-	// Diffuse Intensity
-	public func setLigtDiffuseIntensity(_ intensity: Float) {
-		lightData.diffuseIntensity = intensity
-	}
-	public func getLightDiffuseIntensity()-> Float {
-		lightData.diffuseIntensity
-	}
-	
 	// Specular Intensity
-	public func setLightSpecularIntensity(_ intensity: Float) {
-		lightData.specularIntensity = intensity
-	}
-	public func getLightSpecularIntensity()->Float {
-		lightData.specularIntensity
+	public func specularIntensity(_ intensity: Float) -> LightComponent {
+		let result = self
+		result.lightData.specularIntensity = intensity
+		return result
 	}
 }
 
