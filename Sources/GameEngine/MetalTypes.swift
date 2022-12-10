@@ -51,21 +51,21 @@ extension TimeInterval {
 
 // Position extensions
 extension simd_float3 {
-	public func moveX(_ delta: Float){ self.x += delta }
-	public func moveY(_ delta: Float){ self.y += delta }
-	public func moveZ(_ delta: Float){ self.z += delta }	
+	public mutating func moveX(_ delta: Float){ self.x += delta }
+	public mutating func moveY(_ delta: Float){ self.y += delta }
+	public mutating func moveZ(_ delta: Float){ self.z += delta }	
 }
 // Rotation extensions
 extension simd_float3 {
-	public func rotateX(by delta: Float){ self.x += delta }
-	public func rotateY(by delta: Float){ self.y += delta }
-	public func rotateZ(by delta: Float){ self.z += delta }
+	public mutating func rotateX(by delta: Float){ self.x += delta }
+	public mutating func rotateY(by delta: Float){ self.y += delta }
+	public mutating func rotateZ(by delta: Float){ self.z += delta }
 }
 // Scale extensions
 extension simd_float3 {
-	public func scaleX(by delta: Float){ self.x += delta }
-	public func scaleY(by delta: Float){ self.y += delta }
-	public func scaleZ(by delta: Float){ self.z += delta }
+	public mutating func scaleX(by delta: Float){ self.x += delta }
+	public mutating func scaleY(by delta: Float){ self.y += delta }
+	public mutating func scaleZ(by delta: Float){ self.z += delta }
 }
 // RGB extensions
 extension simd_float3 {
