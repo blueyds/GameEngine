@@ -120,7 +120,7 @@ public class MeshComponent: GKComponent {
 		renderCommandEncoder.setFragmentSamplerState(samplerState, index: 0)
 		renderCommandEncoder.setFragmentBytes(&material, length: Material.stride, index: 1)
 		if(material.useTexture){
-			renderCommandEncoder.setFragmentTexture(_texture!.texture, index: 0)
+			renderCommandEncoder.setFragmentTexture(texture!.texture, index: 0)
 		}
 		mesh.drawPrimitives(renderCommandEncoder)
 	}

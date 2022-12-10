@@ -80,7 +80,12 @@ extension simd_float3 {
 	var b: Float {
 		get { self.z }
 		set { self.z = newValue }
-	}	
+	}
+	init(r: Float, g: Float, a: Float){
+		self.r = r
+		self.g = g
+		self.b = b
+	}
 }
 // RGBA extensions
 extension simd_float4 {
@@ -99,6 +104,12 @@ extension simd_float4 {
 	var a: Float {
 		get { self.w }
 		set { self.w = newValue }
+	}
+	init(r: Float, g: Float, b: Float, a: Float){
+		self.r = r
+		self.g = g
+		self.b = b
+		self.a = a
 	}
 }
 

@@ -10,10 +10,4 @@ public struct Material: sizeable {
 	public var diffuse: simd_float3 = simd_float3(r: 1, g: 1, b: 1)
 	public var specular: simd_float3 = simd_float3(r: 1, g: 1, b: 1)
 	public var shininess: Float = 50
-	public init(){ }
-	public func setMaterialColor(_ color: simd_float4){
-		self.color.r = color
-		useMaterialColor = true
-		useTexture = false
-	}
- }
+}

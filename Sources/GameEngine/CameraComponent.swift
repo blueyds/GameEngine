@@ -18,7 +18,7 @@ public class CameraComponent: GKComponent {
 			viewMatrix.rotate(angle: node.rotation.x, axis: .x)
 			viewMatrix.rotate(angle: node.rotation.y, axis: .y)
 			viewMatrix.rotate(angle: node.rotation.z, axis: .z)
-			viewMatrix.translate(direction: -node.getPosition())
+			viewMatrix.translate(direction: -node.position)
 		}
 		else {fatalError("error in camera component. it is not a node")}
 		
@@ -33,7 +33,7 @@ public class CameraComponent: GKComponent {
 	
 	public var projectionMatrix: matrix_float4x4 {
 		return matrix_float4x4.perspective(degreesFov: fov,
-										   aspectRatio: aspectRation,
+										   aspectRatio: aspectRatio,
 										   near: near,
 										   far: far)
 	}
@@ -41,7 +41,7 @@ public class CameraComponent: GKComponent {
 	public init(named cameraType: String, fov: Float, aspectRatio: Float, near: Float, far: Float){
 		self.cameraName = cameraType
 		self.fov = fov
-		self.aspectRation = aspectRatio
+		self.aspectRatio = aspectRatio
 		self.near = near
 		self.far = far
 		super.init()
