@@ -81,7 +81,7 @@ extension simd_float3 {
 		get { self.z }
 		set { self.z = newValue }
 	}
-	init(r: Float, g: Float, a: Float){
+	init(r: Float, g: Float, b: Float){
 		self.r = r
 		self.g = g
 		self.b = b
