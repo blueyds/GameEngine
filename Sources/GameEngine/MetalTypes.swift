@@ -82,9 +82,7 @@ extension simd_float3 {
 		set { self.z = newValue }
 	}
 	init(r: Float, g: Float, b: Float){
-		self.r = r
-		self.g = g
-		self.b = b
+		self.init(r, g, b)
 	}
 }
 // RGBA extensions
@@ -106,10 +104,7 @@ extension simd_float4 {
 		set { self.w = newValue }
 	}
 	init(r: Float, g: Float, b: Float, a: Float){
-		self.r = r
-		self.g = g
-		self.b = b
-		self.a = a
+		self.init(r, g, b, a)
 	}
 }
 
