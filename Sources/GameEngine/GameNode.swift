@@ -11,15 +11,15 @@ import GameplayKit
 //import GameMeshes
 //import GameComponents
 
-open class GameNode: GKEntity, Identifiable{
-	private var _name: String
+open GameNode: GKEntity, Identifiable{
+	public var name: String
 	public let id = UUID()
 	public weak var parent: GameNode?
 	public weak var root: GameNode?
-
-	private var _position: simd_float3 = simd_float3(repeating: 0)
-	private var _scale: simd_float3 = simd_float3(repeating: 1)
-	private var _rotation: simd_float3 = simd_float3(repeating: 0)
+	
+	public var position: simd_float3 = simd_float3(repeating: 0)
+	public var scale: simd_float3 = simd_float3(repeating: 1)
+	public var rotation: simd_float3 = simd_float3(repeating: 0)
 	
 	 public var parentModelMatrix = matrix_identity_float4x4
 	 public var modelMatrix : matrix_float4x4 {
@@ -69,11 +69,11 @@ open class GameNode: GKEntity, Identifiable{
 // General translation extensions
 extension GameNode {
 	//Naming
-	public func setName(_ name: String){ self._name = name }
-	public func getName()->String{ return _name }
-	public func getID()->String { return id.uuidString }
+	//public func setName(_ name: String){ self._name = name }
+	//public func getName()->String{ return _name }
+	//public func getID()->String { return id.uuidString }
 	
-	//Positioning and Movement
+/*	//Positioning and Movement
 	public func setPosition(_ position: simd_float3){ self._position = position }
 	public func setPositionX(_ xPosition: Float) { self._position.x = xPosition }
 	public func setPositionY(_ yPosition: Float) { self._position.y = yPosition }
@@ -83,12 +83,12 @@ extension GameNode {
 	public func getPositionX()->Float { return self._position.x }
 	public func getPositionY()->Float { return self._position.y }
 	public func getPositionZ()->Float { return self._position.z }
-	public func move(_ x: Float, _ y: Float, _ z: Float){ self._position += simd_float3(x,y,z) }
+*/	public func move(_ x: Float, _ y: Float, _ z: Float){ self._position += simd_float3(x,y,z) }
 	public func moveX(_ delta: Float){ self._position.x += delta }
 	public func moveY(_ delta: Float){ self._position.y += delta }
 	public func moveZ(_ delta: Float){ self._position.z += delta }
 	
-	//Rotating
+/*	//Rotating
 	public func setRotation(_ rotation: simd_float3) { self._rotation = rotation }
 	public func setRotation(x: Float, y: Float, z: Float){setRotation(simd_float3(x, y, z))}
 	public func setRotationX(_ xRotation: Float) { self._rotation.x = xRotation }
@@ -98,12 +98,12 @@ extension GameNode {
 	public func getRotationX()->Float { return self._rotation.x }
 	public func getRotationY()->Float { return self._rotation.y }
 	public func getRotationZ()->Float { return self._rotation.z }
-	public func rotate(_ x: Float, _ y: Float, _ z: Float){ self._rotation += simd_float3(x,y,z) }
+*/	public func rotate(_ x: Float, _ y: Float, _ z: Float){ self._rotation += simd_float3(x,y,z) }
 	public func rotateX(_ delta: Float){ self._rotation.x += delta }
 	public func rotateY(_ delta: Float){ self._rotation.y += delta }
 	public func rotateZ(_ delta: Float){ self._rotation.z += delta }
 	
-	//Scaling
+/*	//Scaling
 	public func setScale(_ scale: simd_float3){ self._scale = scale }
 	public func setScale(_ scale: Float){setScale(simd_float3(scale, scale, scale))}
 	public func setScaleX(_ scaleX: Float){ self._scale.x = scaleX }
@@ -113,7 +113,7 @@ extension GameNode {
 	public func getScaleX()->Float { return self._scale.x }
 	public func getScaleY()->Float { return self._scale.y }
 	public func getScaleZ()->Float { return self._scale.z }
-	public func scaleX(_ delta: Float){ self._scale.x += delta }
+*/	public func scaleX(_ delta: Float){ self._scale.x += delta }
 	public func scaleY(_ delta: Float){ self._scale.y += delta }
 	public func scaleZ(_ delta: Float){ self._scale.z += delta }
 }
