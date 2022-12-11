@@ -68,7 +68,7 @@ open class GameScene: GameNode {
 extension GameScene {
 	public func addMeshComponent(_ mesh: Mesh, toChild: GameNode)  {
 		let component = MeshComponent(mesh: mesh)
-		addMeshComponent(component, tochild: toChild)
+		addMeshComponent(component, toChild: toChild)
 	}	
 	public func addMeshComponent(_ mesh: Mesh, toChild: GameNode, instanceCount: Int) {
 		let component = MeshComponent(mesh: mesh, instanceCount: instanceCount)
