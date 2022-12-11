@@ -38,6 +38,7 @@ public class MeshComponent: GKComponent {
 	public init (mesh: Mesh) {
 	
 		self.mesh = mesh
+		self.material = Material()
 		modelConstants.append(ModelConstants())
 		if MeshComponent.Engine == nil {
 			fatalError("Set MeshComponent.engine prior to initializing any meshes")
