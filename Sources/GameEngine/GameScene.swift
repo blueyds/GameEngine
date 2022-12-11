@@ -66,17 +66,17 @@ open class GameScene: GameNode {
 }
 // mesh extensions for the scene
 extension GameScene {
-	public func addMeshComponent(_ mesh: Mesh, toChild: GameNode) -> MeshComponent {
+	public func addMeshComponent(_ mesh: Mesh, toChild: GameNode)  {
 		let component = MeshComponent(mesh: mesh)
-		toChild.addComponent(component)
-		_meshManager.addComponent(foundIn: toChild)
-		return component
-	}
-	public func addMeshComponent(_ mesh: Mesh, toChild: GameNode, instanceCount: Int) -> MeshComponent {
+		addMeshComponent(component, tochild: toChild)
+	}	
+	public func addMeshComponent(_ mesh: Mesh, toChild: GameNode, instanceCount: Int) {
 		let component = MeshComponent(mesh: mesh, instanceCount: instanceCount)
+		addMeshComponent(component, toChild: toChild)
+	}
+	public func addMeshComponent(_ component: MeshComponent, toChild: GameNode){
 		toChild.addComponent(component)
 		_meshManager.addComponent(foundIn: toChild)
-		return component
 	}
 	public func removeMeshComponent(fromChild: GameNode){
 		fromChild.removeComponent(ofType: MeshComponent.self)
@@ -85,11 +85,13 @@ extension GameScene {
 }
 // light extensions for the scene
 extension GameScene {
-	public func addLightComponent(toChild: GameNode) -> LightComponent {
+	public func addLightComponent(toChild: GameNode)  {
 		let component = LightComponent()
+		addLightComponent(component, toChild: toChild)
+	}
+	public func addLightComponent(_ component: LightComponent, tochild: GameNode){
 		toChild.addComponent(component)
 		_lightManager.addComponent(foundIn: toChild)
-		return component
 	}
 	// MARK: todo may need to remove from the lightmanager
 	public func removeLightComponent(fromChild: GameNode){
@@ -100,8 +102,11 @@ extension GameScene {
 
 // camera extensions for the scene
 extension GameScene {
-	public func addCameraComponent(toChild: GameNode, named name: String, fov: Float, aspectRatio: Float, near: Float, far: Float) -> CameraComponent {
+	public func addCameraComponent(toChild: GameNode, named name: String, fov: Float, aspectRatio: Float, near: Float, far: Float) {
 		let component = CameraComponent(named: name, fov: fov, aspectRatio: aspectRatio, near: near, far: far)
+		addCameraComponent(component, toChild: toChild)
+	}
+	public func addCameraComponent(_ component: CameraComponent, toChild: Gamenode){
 		toChild.addComponent(component)
 		if _camera != nil {
 			if let node = _camera?.entity as? GameNode {
@@ -109,7 +114,7 @@ extension GameScene {
 			}
 		}
 		_camera = toChild.component(ofType: CameraComponent.self)
-		return component
+		
 	}
 	public func removeCameraComponent(fromChild: GameNode) {
 		fromChild.removeComponent(ofType: CameraComponent.self)
