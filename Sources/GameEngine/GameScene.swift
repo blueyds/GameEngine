@@ -66,15 +66,17 @@ open class GameScene: GameNode {
 }
 // mesh extensions for the scene
 extension GameScene {
-	public func addMeshComponent(_ mesh: Mesh, toChild: GameNode){
+	public func addMeshComponent(_ mesh: Mesh, toChild: GameNode) -> MeshComponent {
 		let component = MeshComponent(mesh: mesh)
 		toChild.addComponent(component)
 		_meshManager.addComponent(foundIn: toChild)
+		return component
 	}
-	public func addMeshComponent(_ mesh: Mesh, toChild: GameNode, instanceCount: Int){
+	public func addMeshComponent(_ mesh: Mesh, toChild: GameNode, instanceCount: Int) -> MeshComponent {
 		let component = MeshComponent(mesh: mesh, instanceCount: instanceCount)
 		toChild.addComponent(component)
 		_meshManager.addComponent(foundIn: toChild)
+		return componenet
 	}
 	public func removeMeshComponent(fromChild: GameNode){
 		fromChild.removeComponent(ofType: MeshComponent.self)
@@ -83,10 +85,11 @@ extension GameScene {
 }
 // light extensions for the scene
 extension GameScene {
-	public func addLightComponent(toChild: GameNode){
+	public func addLightComponent(toChild: GameNode) -> LightComponent {
 		let component = LightComponent()
 		toChild.addComponent(component)
 		_lightManager.addComponent(foundIn: toChild)
+		return component
 	}
 	// MARK: todo may need to remove from the lightmanager
 	public func removeLightComponent(fromChild: GameNode){
@@ -97,7 +100,7 @@ extension GameScene {
 
 // camera extensions for the scene
 extension GameScene {
-	public func addCameraComponent(toChild: GameNode, named name: String, fov: Float, aspectRatio: Float, near: Float, far: Float){
+	public func addCameraComponent(toChild: GameNode, named name: String, fov: Float, aspectRatio: Float, near: Float, far: Float) -> CameraComponent {
 		let component = CameraComponent(named: name, fov: fov, aspectRatio: aspectRatio, near: near, far: far)
 		toChild.addComponent(component)
 		if _camera != nil {
@@ -106,6 +109,7 @@ extension GameScene {
 			}
 		}
 		_camera = toChild.component(ofType: CameraComponent.self)
+		return component
 	}
 	public func removeCameraComponent(fromChild: GameNode) {
 		fromChild.removeComponent(ofType: CameraComponent.self)
