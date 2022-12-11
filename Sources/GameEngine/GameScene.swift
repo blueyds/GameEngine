@@ -89,7 +89,7 @@ extension GameScene {
 		let component = LightComponent()
 		addLightComponent(component, toChild: toChild)
 	}
-	public func addLightComponent(_ component: LightComponent, tochild: GameNode){
+	public func addLightComponent(_ component: LightComponent, toChild: GameNode){
 		toChild.addComponent(component)
 		_lightManager.addComponent(foundIn: toChild)
 	}
