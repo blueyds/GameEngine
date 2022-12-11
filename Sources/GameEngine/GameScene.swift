@@ -76,7 +76,7 @@ extension GameScene {
 		let component = MeshComponent(mesh: mesh, instanceCount: instanceCount)
 		toChild.addComponent(component)
 		_meshManager.addComponent(foundIn: toChild)
-		return componenet
+		return component
 	}
 	public func removeMeshComponent(fromChild: GameNode){
 		fromChild.removeComponent(ofType: MeshComponent.self)
