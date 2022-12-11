@@ -106,7 +106,7 @@ extension GameScene {
 		let component = CameraComponent(named: name, fov: fov, aspectRatio: aspectRatio, near: near, far: far)
 		addCameraComponent(component, toChild: toChild)
 	}
-	public func addCameraComponent(_ component: CameraComponent, toChild: Gamenode){
+	public func addCameraComponent(_ component: CameraComponent, toChild: GameNode){
 		toChild.addComponent(component)
 		if _camera != nil {
 			if let node = _camera?.entity as? GameNode {
