@@ -52,6 +52,8 @@ open class GameNode: GKEntity, Identifiable {
 	public func addChild(_ child: GameNode){
 		children.append(child)
 		child.parent = self
+		child.root = self.root
+		
 		
 	}
 	open func doUpdate(deltaTime: TimeInterval) {	}
