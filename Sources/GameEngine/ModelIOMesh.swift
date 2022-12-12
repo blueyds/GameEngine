@@ -6,7 +6,7 @@ open class ModelIOMesh: Mesh {
     public var mesh: MTKMesh? = nil
     public static var Engine: EngineProtocol? = MeshComponent.Engine
     
-    init(){
+    public init(){
         if ModelIOMesh.Engine == nil {
             fatalError("MeshCompjononet engine should be initialized before meshes")
         }

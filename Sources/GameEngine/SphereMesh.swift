@@ -1,11 +1,11 @@
 import MetalKit
 import ModelIO
 
-class Sphere: ModelIOMesh {
+public class Sphere: ModelIOMesh {
     // the more segments the more detailed sphere will be
     // anything less than 22 may not look right
     
-    init(segments: UInt32 = 30){
+    public init(segments: UInt32 = 30){
         super.init()
         let allocator = MTKMeshBufferAllocator(device: ModelIOMesh.Engine!.device)
         let mdlMesh = MDLMesh(
