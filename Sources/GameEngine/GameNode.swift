@@ -93,7 +93,7 @@ extension GameNode {
 
 // scene extensions
 extension GameNode{
-	func addChild(_ child: GameNode, to scene: GameScene){
+	public func addChild(_ child: GameNode, to scene: GameScene){
 		scene.addChild(child)
 		if child.component(ofType: MeshComponent.self) != nil{
 			scene._meshManager.addComponent(foundIn: child)
