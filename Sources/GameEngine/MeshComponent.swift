@@ -17,9 +17,12 @@ public class MeshComponent: GKComponent {
 			if texture == nil {
 				self.material.useTexture = false
 				self.material.useMaterialColor = true
+				self.renderState = MeshComponent.Engine!.defaultBasicRenderState
 			} else {
 				self.material.useTexture = true
 				self.material.useMaterialColor = false
+				self.renderState = MeshComponent.Engine!.basicRenderStateNoDepth
+
 			}	
 		}
 	}
@@ -43,7 +46,7 @@ public class MeshComponent: GKComponent {
 		if MeshComponent.Engine == nil {
 			fatalError("Set MeshComponent.engine prior to initializing any meshes")
 		}
-		renderState = MeshComponent.Engine!.defaultBasicRenderState
+		renderState = MeshComponent.Engine!.basicRenderStateNoDepth
 		depthStencilState = MeshComponent.Engine!.defaultDepthStencilState
 		samplerState = MeshComponent.Engine!.defaultSamplerState
 		super.init()
@@ -106,8 +109,9 @@ public class MeshComponent: GKComponent {
 	}
 	
 	public func doRender(_ renderCommandEncoder: MTLRenderCommandEncoder) {
+	
 		renderCommandEncoder.setRenderPipelineState(renderState)
-		renderCommandEncoder.setDepthStencilState(depthStencilState)
+
 		
 		//Vertex Shader
 		if modelConstants.count == 1 {
@@ -122,6 +126,7 @@ public class MeshComponent: GKComponent {
 		renderCommandEncoder.setFragmentBytes(&material, length: Material.stride, index: 1)
 		if(material.useTexture){
 			renderCommandEncoder.setFragmentTexture(texture!.texture, index: 0)
+			renderCommandEncoder.setDepthStencilState(depthStencilState)
 		}
 		mesh.drawPrimitives(renderCommandEncoder)
 	}

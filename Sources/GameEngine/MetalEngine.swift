@@ -21,6 +21,8 @@ public protocol EngineProtocol {
 	var defaultInstancedRenderState: MTLRenderPipelineState { get }
 	var defaultDepthStencilState: MTLDepthStencilState { get }
 	var defaultSamplerState: MTLSamplerState { get }
+	var basicRenderStateNoDepth: MTLRenderPipelineState { get }
+	//var noDepthStencilState: MTLDepthStencilState { get }
 }
 //public final class MetalEngine {
 //	public static let shared: MetalEngine = MetalEngine()

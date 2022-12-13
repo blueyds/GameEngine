@@ -90,3 +90,20 @@ extension GameNode {
 		return result
 	}
 }
+
+// scene extensions
+extension GameNode{
+	func addChild(_ child: GameNode, to scene: GameScene){
+		scene.addChild(child)
+		if child.component(ofType: MeshComponent.self) != nil{
+			scene._meshManager.addComponent(foundIn: child)
+		}
+		if child.component(ofType: LightComponent.self) != nil{
+			scene._lightManager.addComponent(foundIn: child)
+		}
+		if let component = child.component(ofType: CameraComponent.self){
+			scene._camera = component
+		}
+	}
+}
+
