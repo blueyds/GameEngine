@@ -7,7 +7,7 @@ let package = Package(
     name: "GameEngine",
 	platforms: [
 		.macOS(.v10_15),
-		.iOS(.v13_4)],
+		.iOS(.v14)],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library( name: "GameEngine", targets: [
