@@ -101,7 +101,7 @@ extension GameNode{
 			scene._meshManager.addComponent(foundIn: child)
 		}
 		if child.component(ofType: LightComponent.self) != nil{
-			scene._lightManag}er.addComponent(foundIn: child)
+			scene._lightManager.addComponent(foundIn: child)
 		}
 		if let component = child.component(ofType: CameraComponent.self){
 			scene._camera = component
