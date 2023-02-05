@@ -75,8 +75,8 @@ public class Mouse {
 	
 	//Returns the mouse position in screen-view coordinates [-1, 1]
 	public static func GetMouseViewportPosition(screenSize: simd_float2)->simd_float2{
-		let x = (overallMousePosition.x - .x * 0.5) / (Renderer.ScreenSize.x * 0.5)
-		let y = (overallMousePosition.y - Renderer.ScreenSize.y * 0.5) / (Renderer.ScreenSize.y * 0.5)
+		let x = (overallMousePosition.x - .x * 0.5) / (screenSize.x * 0.5)
+		let y = (overallMousePosition.y - screenSize.y * 0.5) / (screenSize.y * 0.5)
 		return simd_float2(x, y)
 	}
 }
