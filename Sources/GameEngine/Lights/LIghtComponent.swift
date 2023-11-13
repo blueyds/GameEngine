@@ -11,6 +11,13 @@ import GameplayKit
 
 public class LightComponent: GKComponent {
 	public var lightData: LightData = LightData()
+	public weak var node: GameNode {
+		if let n = entity as? GameNode {
+			return n
+		} else {
+			fatalError("Node is not a gamenode in lightcomponent")
+		}
+	}
 	public override init(){
 		lightData = LightData()
 		super.init()
@@ -20,9 +27,7 @@ public class LightComponent: GKComponent {
 	}
 
 	public override func update(deltaTime: TimeInterval) {
-		if let node = entity as? GameNode {
-			lightData.position = node.position
-		}
+		lightData.position = node.position
 	}
 }
 

@@ -7,30 +7,6 @@
 
 import MetalKit
 
-//public class TextureLibrary {
-//	public enum Types {
-//		case None
-//		case PartyPirateParot
-//		case Cruiser
-//	}
-//	let _device: MTLDevice
-//	private var _textures: [Types : Texture] = [:]
-//	
-//	public init (device: MTLDevice) {
-//		_device = device
-//		createDefaultTextures()
-//	}
-//	private func createDefaultTextures(){
-//		addTexture(name: "PartyPirateParot", forKey: .PartyPirateParot)
-//		addTexture(name: "cruiser", ext: "bmp", origin: .bottomLeft, forKey: .Cruiser)
-//	}
-//	private func addTexture(name: String, ext: String = "png", origin: MTKTextureLoader.Origin = .topLeft, forKey: Types){
-//		_textures.updateValue(Texture(name, ext: ext, origin: origin, device: _device), forKey: forKey )
-//	}
-//	public subscript (_ type: Types) -> MTLTexture? {
-//		return _textures[type]?.texture
-//	}
-//}
 
 public class Texture {
 	var texture: MTLTexture!

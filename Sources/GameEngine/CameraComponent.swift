@@ -10,21 +10,25 @@ import GameplayKit
 
 public class CameraComponent: GKComponent {
 	var cameraName: String
-	
+	public weak var node: GameNode {
+		if let n = entity as? GameNode{
+			return n
+		} else {
+			fatalError("error in camera component. it is not a node")
+		}
+	}
 	public var viewMatrix: matrix_float4x4 {
 		var viewMatrix = matrix_identity_float4x4
-		
-		if let node = entity as? GameNode {
-			viewMatrix.rotate(angle: node.rotation.x, axis: .x)
-			viewMatrix.rotate(angle: node.rotation.y, axis: .y)
-			viewMatrix.rotate(angle: node.rotation.z, axis: .z)
-			viewMatrix.translate(direction: -node.position)
-		}
-		else {fatalError("error in camera component. it is not a node")}
+		viewMatrix.rotate(angle: node.rotation.x, axis: .x)
+		viewMatrix.rotate(angle: node.rotation.y, axis: .y)
+		viewMatrix.rotate(angle: node.rotation.z, axis: .z)
+		viewMatrix.translate(direction: -node.position)
 		
 		return viewMatrix
 	}
-	
+	public var position: simd_float3 {
+		node!.position
+	}
 	public var fov: Float
 	public var aspectRatio: Float
 	public var near: Float
@@ -53,6 +57,9 @@ public class CameraComponent: GKComponent {
 	}
 	public func setAspectRatio(screenSize: CGSize){
         self.aspectRatio = Float(screenSize.width) / Float(screenSize.height)
+    }
+    public func setAspectRatio(width: Float, height: Float){
+    	self.aspectRatio = width / height
     }
 	
 }

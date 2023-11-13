@@ -8,20 +8,22 @@ open class CustomMesh: Mesh {
 		_vertices.count
 	}
 	var instanceCount: Int = 1
+    private var _color: GameColor
 	static var Engine: EngineProtocol? = nil
-	public init() {
+    
+	public init(color: GameColor) {
 		if CustomMesh.Engine == nil {
 			fatalError("MeshComponent.Engine should be initialized before any meshes")
 		}
+        _color = color
 		createVertices()
 		createBuffers()
 	}
 	open func createVertices() {	}
 	
-	public func addVertex(position: simd_float3,
-				   color: simd_float4 = simd_float4(1,0,1,1),
-				   textureCoordinates: simd_float2 = simd_float2(repeating: 0),
-				   normal: simd_float3 = simd_float3(0,1,0)){
+	public func addVertex(position: float3,
+				   textureCoordinates: float2 = float2.zero,
+				   normal: float3 = float3(0,1,0)){
 		_vertices.append(Vertex(position: position, color: color, textureCoordinate: textureCoordinates, normal: normal))
 	}
 	func createBuffers(){

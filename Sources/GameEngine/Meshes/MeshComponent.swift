@@ -37,29 +37,37 @@ public class MeshComponent: GKComponent {
 	var renderState: MTLRenderPipelineState
 	var depthStencilState: MTLDepthStencilState
 	var samplerState: MTLSamplerState
-	
+	private weak var _node: GameNode {
+        if let n = entity as? GameNode{
+            return n
+        } else {
+            fatalError("mesh entity ios not GameNode")
+        }
+	}
 	public init (mesh: Mesh) {
 	
 		self.mesh = mesh
 		self.material = Material()
-		modelConstants.append(ModelConstants())
-		if MeshComponent.Engine == nil {
-			fatalError("Set MeshComponent.engine prior to initializing any meshes")
-		}
-		renderState = MeshComponent.Engine!.basicRenderStateNoDepth
-		depthStencilState = MeshComponent.Engine!.defaultDepthStencilState
-		samplerState = MeshComponent.Engine!.defaultSamplerState
+       guard let engine = MeshComponent.Engine {
+           fatalError("Set MeshComponent.engine prior to initializing any meshes")
+       }
+		
+		renderState = engine.renderStates["default"]!
+		depthStencilState = engine.depthStencilStates["default"]!
+		samplerState = engine.samplerStates["default"]!
 		super.init()
+        createModelConstants(1)
 	}
 	public init(mesh: Mesh, instanceCount: Int){
 		self.mesh = mesh
 		mesh.setInstanceCount(instanceCount)
-		if MeshComponent.Engine == nil {
-			fatalError("Set MeshComponent.engine prior to initializing any meshes")
-		}
-		renderState = MeshComponent.Engine!.defaultInstancedRenderState
-		depthStencilState = MeshComponent.Engine!.defaultDepthStencilState
-		samplerState = MeshComponent.Engine!.defaultSamplerState
+		guard let engine = MeshComponent.Engine {
+           fatalError("Set MeshComponent.engine prior to initializing any meshes")
+       }
+		
+		renderState = engine.renderStates["default"]!
+		depthStencilState = engine.depthStencilStates["default"]!
+		samplerState = engine.samplerStates["default"]!
 		super.init()
 		createModelConstants(instanceCount)
 		createBuffers(instanceCount)
@@ -67,13 +75,10 @@ public class MeshComponent: GKComponent {
 	
 	public override func didAddToEntity(){
 		if modelConstants.count != 1 {
-			if let node = entity as? GameNode {
-				for _ in 0..<modelConstants.count {
-					node.addChild(GameNode(name: "\(node.name).Instanced_node"))
-				}
-			}else {fatalError("entity is not a node.")}
+			for _ in 0..<modelConstants.count {
+				_node.addChild(GameNode(name: "\(_node.name).Instanced_node"))
+			}
 		}
-		
 	}
 	
 	func createModelConstants(_ instanceCount: Int){
@@ -94,19 +99,16 @@ public class MeshComponent: GKComponent {
 	
 	
 	private func updateModelConstants(){
-		if let node = entity as? GameNode {
-			if modelConstants.count == 1 {
-				modelConstants[0].modelMatrix = node.modelMatrix
-			}
-			else {
-				var pointer = _modelConstantBuffer.contents().bindMemory(to: ModelConstants.self, capacity: node.children.count)
-				for child in node.children {
-					pointer.pointee.modelMatrix = child.modelMatrix
-					pointer = pointer.advanced(by: 1)
-				}
+		if modelConstants.count == 1 {
+			modelConstants[0].modelMatrix = _node.modelMatrix
+		} else {
+			var pointer = _modelConstantBuffer.contents().bindMemory(to: ModelConstants.self, capacity: _node.children.count)
+			for child in _node.children {
+				pointer.pointee.modelMatrix = child.modelMatrix
+				pointer = pointer.advanced(by: 1)
 			}
 		}
-	}
+    }
 	
 	public func doRender(_ renderCommandEncoder: MTLRenderCommandEncoder) {
 	

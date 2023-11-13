@@ -20,8 +20,8 @@ open class GameScene: GameNode {
 	// var camera = DebugCamera()
 	public init(){
 		super.init(name: "Scene")
-		self.root = self
-		self.parent = self
+		self._scene = self
+        
 		buildScene()
 		print(self)
 	}
@@ -36,9 +36,7 @@ open class GameScene: GameNode {
 		if let camera = _camera {
 			_sceneConstants.viewMatrix = camera.viewMatrix
 			_sceneConstants.projectionMatrix = camera.projectionMatrix
-			if let node = camera.entity as? GameNode {
-				_sceneConstants.cameraPosition = node.position
-			}
+			_sceneConstants.cameraPosition = camera.position	
 		}
 		_sceneConstants.totalGameTime = Float(deltaTime)
 
@@ -63,7 +61,23 @@ open class GameScene: GameNode {
 		_lightManager.setLightData(renderCommandEncoder)
 		_meshManager.renderAll(rce: renderCommandEncoder)
 	}
+    
 }
+extension GameScene{
+    public func scanComponents(from child: GameNode){
+       // if _scene == nil { return }
+        if child.component(ofType: MeshComponent.self) != nil{
+			_scene!._meshManager.addComponent(foundIn: child)
+		}
+		if child.component(ofType: LightComponent.self) != nil{
+			_scene!._lightManager.addComponent(foundIn: child)
+		}
+		if let component = child.component(ofType: CameraComponent.self){
+			_scene!._camera = component
+		}
+    }
+}
+
 // mesh extensions for the scene
 extension GameScene {
 	public func addMeshComponent(_ mesh: Mesh, toChild: GameNode)  {

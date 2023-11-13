@@ -13,24 +13,14 @@ public enum Axis{
 	case z
 }
 
+public typealias matrix = matrix_float4x4
 
-extension Float {
-	public var toRadians: Float{
-		(self / 100.0) * Float.pi
+extension matrix {
+	public static var identity: matrix {
+        matrix_identity_float4x4
 	}
-	
-	public var toDegrees: Float {
-		self * (100.0 / Float.pi)
-	}
-	
-	public static var randomZeroToOne: Float {
-		return Float(arc4random()) / Float(UINT32_MAX)
-	}
-}
-extension matrix_float4x4 {
-	
 	public mutating func translate(direction: simd_float3){
-		var result = matrix_identity_float4x4
+		var result = matrix.Identity
 		
 		result.columns = (
 			simd_float4(1,0,0,0),
@@ -45,7 +35,7 @@ extension matrix_float4x4 {
 	}
 	
 	public mutating func scale(axis: simd_float3){
-		var result = matrix_identity_float4x4
+		var result = matrix.identity
 		
 		result.columns = (
 			simd_float4(axis.x,0,0,0),
@@ -57,7 +47,7 @@ extension matrix_float4x4 {
 	}
 	
 	public mutating func rotate(angle: Float, axis: Axis){
-		var result = matrix_identity_float4x4
+		var result = matrix.identity
 		let x: Float = axis == .x ? 1 : 0
 		let y: Float = axis == .y ? 1 : 0
 		let z: Float = axis == .z ? 1 : 0
@@ -91,7 +81,7 @@ extension matrix_float4x4 {
 		
 		let t: Float = tan(fov / 2)
 		
-		var result = matrix_identity_float4x4
+		var result = matrix.identity
 		result.columns = (
 			simd_float4(1 / (aspectRatio * t),
 						0,
