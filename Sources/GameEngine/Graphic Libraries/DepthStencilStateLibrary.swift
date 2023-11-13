@@ -28,7 +28,7 @@ public class DepthStencilStateLibrary {
 		_depthStencilStates.updateValue(depthStencilState, forKey: named)
 	}
     public func add(named: String, isDepthWriteEnabled: Bool, depthCompareFunction: MTLCompareFunction) {
-        var state = DepthStencilState(device: device, isDepthWriteEnabled: isDepthWriteEnabled, depthCompareFunction: depthCompareFunction)
+        let state = DepthStencilState(device: device, isDepthWriteEnabled: isDepthWriteEnabled, depthCompareFunction: depthCompareFunction)
         add(depthStencilState: state, named: named)
     }
 	public subscript(name: String) ->MTLDepthStencilState? {

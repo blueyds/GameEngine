@@ -62,7 +62,7 @@ open class GameNode: GKEntity, Identifiable {
 
 // modifier extensions
 extension GameNode {
-	public func Position(_ pos: float3) -> GameNode {
+	public func Position(_ pos: Float3) -> GameNode {
 		let result = self
 		result.position = pos
 		return result
@@ -70,7 +70,7 @@ extension GameNode {
 	public func Position(_ x: Float, _ y: Float, _ z: Float) -> GameNode {
 		return Position(float3(x, y, z))
 	}
-	public func Scale(by value: float3) -> GameNode {
+	public func Scale(by value: Float3) -> GameNode {
 		let result = self
 		result.scale = value
 		return result
@@ -80,7 +80,7 @@ extension GameNode {
 		result.scale = float3(repeating: value)
 		return result
 	}
-	public func Rotation(by value: float3) -> GameNode {
+	public func Rotation(by value: Float3) -> GameNode {
 		let result = self
 		result.rotation = value
 		return result

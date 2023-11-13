@@ -17,12 +17,12 @@ public class MeshComponent: GKComponent {
 			if texture == nil {
 				self.material.useTexture = false
 				self.material.useMaterialColor = true
-				self.renderState = MeshComponent.Engine!.renderStates["default"]
+				self.renderState = MeshComponent.Engine!.renderStates["default"]!
 			} else {
 				self.material.useTexture = true
 				self.material.useMaterialColor = false
                 // TODO: should bel basicRenderwithNoDepth
-				self.renderState = MeshComponent.Engine!.renderStates["default"]
+				self.renderState = MeshComponent.Engine!.renderStates["default"]!
 
 			}	
 		}
@@ -97,7 +97,7 @@ public class MeshComponent: GKComponent {
 	
 	private func updateModelConstants(){
 		if modelConstants.count == 1 {
-			modelConstants[0].modelMatrix = _node.modelMatrix
+			modelConstants[0].modelMatrix = _node!.modelMatrix
 		} else {
 			var pointer = _modelConstantBuffer.contents().bindMemory(to: ModelConstants.self, capacity: _node!.children.count)
 			for child in _node!.children {
