@@ -46,21 +46,22 @@ public class ShaderLibrary {
     private func createShader(_ functionName: String)-> Shader{
         Shader(functionName: functionName, library: library)
     }
-	public subscript(_ name: String, _ fnType: ShaderLibrary.FunctionType) -> MTLFunction? {
+	public subscript(_ name: String, _ fnType: ShaderFunctionType) -> MTLFunction? {
 		switch fnType{
-            case vertex:
+            case .vertex:
                 return vertexShaders[name]?.function
-            case fragment:
+            case .fragment:
                 return fragmentShaders[name]?.function
 		}
 	}
 }
+public enum ShaderFunctionType {
+    case vertex
+    case fragment
+}
 
 extension ShaderLibrary {
-    public enum FunctionType {
-        case vertex
-        case fragment
-    }
+    
 	public class Shader {
 		var functionName: String
 		var function: MTLFunction
