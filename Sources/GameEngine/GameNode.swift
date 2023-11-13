@@ -68,7 +68,7 @@ extension GameNode {
 		return result
 	}
 	public func Position(_ x: Float, _ y: Float, _ z: Float) -> GameNode {
-		return Position(float3(x, y, z))
+		return Position(Float3(x, y, z))
 	}
 	public func Scale(by value: Float3) -> GameNode {
 		let result = self
