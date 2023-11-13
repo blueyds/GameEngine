@@ -14,16 +14,19 @@ public class CameraComponent: GKComponent {
 		entity as? GameNode
 	}
 	public var viewMatrix: Matrix {
-		var viewMatrix = Matrix.identity
-		viewMatrix.rotate(angle: node!.rotation.x, axis: .x)
-		viewMatrix.rotate(angle: node!.rotation.y, axis: .y)
-		viewMatrix.rotate(angle: node!.rotation.z, axis: .z)
-		viewMatrix.translate(direction: -node!.position)
+		var matrix = Matrix.identity
+		matrix.translate(direction: position)
+		matrix.rotate(angle: node!.rotation.x, axis: .x)
+		matrix.rotate(angle: node!.rotation.y, axis: .y)
+		matrix.rotate(angle: node!.rotation.z, axis: .z)
 		
-		return viewMatrix
+		return matrix_multiply(parentMatrix, matrix)
 	}
-	public var position: Float3 {
-		node!.position
+	var position: Float3 {
+		-node!.position
+	}
+	var parentMatrix: Matrix{
+		node!.parentModelMatrix
 	}
 	public var fov: Float
 	public var aspectRatio: Float
