@@ -107,27 +107,29 @@ public class MeshComponent: GKComponent {
 		}
     }
 	
-	public func doRender(_ renderCommandEncoder: MTLRenderCommandEncoder) {
-	
-		renderCommandEncoder.setRenderPipelineState(renderState)
+	public func doRender(_ rCe: MTLRenderCommandEncoder) {
+	    rCe.pushDebugGroup(_node!.name)
+       rCe.setRenderPipelineState(renderState)
 
 		
 		//Vertex Shader
 		if modelConstants.count == 1 {
-			renderCommandEncoder.setVertexBytes(&modelConstants, length: ModelConstants.stride, index: 2)
+			rCe.setVertexBytes(&modelConstants, length: ModelConstants.stride, index: 2)
 		}else{
-			renderCommandEncoder.setVertexBuffer(_modelConstantBuffer, offset: 0, index: 2)
+			rCe.setVertexBuffer(_modelConstantBuffer, offset: 0, index: 2)
 		}
 		
 		
 		//Fragment Shader
-		renderCommandEncoder.setFragmentSamplerState(samplerState, index: 0)
-		renderCommandEncoder.setFragmentBytes(&material, length: Material.stride, index: 1)
+		rCe.setFragmentSamplerState(samplerState, index: 0)
+		rCe.setFragmentBytes(&material, length: Material.stride, index: 1)
 		if(material.useTexture){
-			renderCommandEncoder.setFragmentTexture(texture!.texture, index: 0)
-			renderCommandEncoder.setDepthStencilState(depthStencilState)
+			rCe.setFragmentTexture(texture!.texture, index: 0)
+			rCe.setDepthStencilState(depthStencilState)
 		}
-		mesh.drawPrimitives(renderCommandEncoder)
+		mesh.drawPrimitives(rCe)
+         rCe.popDebugGroup()
+		
 	}
 }
 // modifier extensions

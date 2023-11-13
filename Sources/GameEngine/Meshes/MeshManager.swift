@@ -20,12 +20,8 @@ public class MeshManager {
 	}
 	public func renderAll(rce: MTLRenderCommandEncoder){
 		_components.components.forEach(){
-			if $0.node != nil {
-				rce.pushDebugGroup($0.node!.name)
-				$0.node!.doRender(rce)
-				rce.popDebugGroup()
-			}
-		}
+			$0.doRender(rce)
+        }
 	}
 	public func addComponent(foundIn fromNode: GKEntity) {
 		_components.addComponent(foundIn: fromNode)
