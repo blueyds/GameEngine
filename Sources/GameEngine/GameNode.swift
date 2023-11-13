@@ -15,16 +15,16 @@ import GameplayKit
 open class GameNode: GKEntity, Identifiable {
 	public var name: String
 	public let id = UUID()
-	public var parent: GameNode? = nil
+	var parent: GameNode? = nil
 //	public var root: GameNode? = nil
-	private var _scene: GameScene? = nil
-	public var position = float3(0.0, 0.0, 0.0)
-	public var scale = float3(1.0, 1.0, 1.0)
-	public var rotation = float3(0.0, 0.0, 0.0)
+	var scene: GameScene? = nil
+	public var position = Float3(0.0, 0.0, 0.0)
+	public var scale = Float3(1.0, 1.0, 1.0)
+	public var rotation = Float3(0.0, 0.0, 0.0)
 	
-	public var parentModelMatrix = matrix.identity
-	public var modelMatrix : matrix {
-		var matrix = matrix.identity
+	public var parentModelMatrix = Matrix.identity
+	public var modelMatrix : Matrix {
+		var matrix = Matrix.identity
 		matrix.translate(direction: position)
 		matrix.scale(axis: scale)
 		matrix.rotate(angle: rotation.x, axis: .x)
@@ -33,12 +33,10 @@ open class GameNode: GKEntity, Identifiable {
 		return matrix_multiply(parentModelMatrix, matrix)
 		
 	}
-	public var children: [GameNode] = []
+	var children: [GameNode] = []
 	
-	public init(name: String, parent: GameNode? = nil, scene: GameScene? = nil){
+	public init(name: String, parent: GameNode? = nil){
 		self.name = name
-		self.parent = parent
-        self._scene = scene
 		super.init()
 	}
 	
@@ -47,8 +45,8 @@ open class GameNode: GKEntity, Identifiable {
 	}
 	public func addChild(_ child: GameNode){
 		child.parent = self
-		child.root = self.root
-        scanComponents(from: child)
+		child.scene = self.scene
+        scene.scanComponents(from: child)
         children.append(child)
 	}
 	open func doUpdate(deltaTime: TimeInterval) {	}

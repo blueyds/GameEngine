@@ -1,8 +1,8 @@
 import simd
 
-public typealias floar2 = simd_float2
-public typealias float3 = simd_float3
-public typealias float4 = simd_float4
+public typealias Float2 = simd_float2
+public typealias Float3 = simd_float3
+public typealias Float4 = simd_float4
 extension Float {
 	public var toRadians: Float{
 		(self / 100.0) * Float.pi
@@ -16,51 +16,51 @@ extension Float {
 		return Float(arc4random()) / Float(UINT32_MAX)
 	}
 }
-extension float2{
-    public static var zero: float2{
-        float2(0,0)
+extension Float2{
+    public static var zero: Float2{
+        Float2(0,0)
     }
-    public static var one: float2{
-        float2(1,1)
-    }
-}
-extension float3{
-    public static var zero: float3 {
-        float3(0,0,0)
-    }
-    public static var one: float3 {
-        float3(1,1,1)
+    public static var one: Float2{
+        Float2(1,1)
     }
 }
-extension float4{
-    public static var zero: floar4{
-        float4(0,0,0,0)
+extension Float3{
+    public static var zero: Float3 {
+        Float3(0,0,0)
     }
-    public static var one: float4{
-        float4(1,1,1,1)
+    public static var one: Float3 {
+        Float3(1,1,1)
+    }
+}
+extension Float4{
+    public static var zero: Float4{
+        Float4(0,0,0,0)
+    }
+    public static var one: Float4{
+        Float4(1,1,1,1)
     }
 }
 
 // Position extensions
-extension simd_float3 {
+extension Float3 {
 	public mutating func moveX(_ delta: Float){ self.x += delta }
 	public mutating func moveY(_ delta: Float){ self.y += delta }
 	public mutating func moveZ(_ delta: Float){ self.z += delta }	
 }
 // Rotation extensions
-extension simd_float3 {
+extension Float3 {
 	public mutating func rotateX(by delta: Float){ self.x += delta }
 	public mutating func rotateY(by delta: Float){ self.y += delta }
 	public mutating func rotateZ(by delta: Float){ self.z += delta }
 }
 // Scale extensions
-extension simd_float3 {
+extension Float3 {
 	public mutating func scaleX(by delta: Float){ self.x += delta }
 	public mutating func scaleY(by delta: Float){ self.y += delta }
 	public mutating func scaleZ(by delta: Float){ self.z += delta }
 }
 // RGB extensions
-extension simd_float3 {
+extension Float3 {
 	var r: Float { 
 		get { self.x }
 		set { self.x = newValue }
@@ -78,7 +78,7 @@ extension simd_float3 {
 	}
 }
 // RGBA extensions
-extension simd_float4 {
+extension Float4 {
 	var r: Float { 
 		get { self.x }
 		set { self.x = newValue }

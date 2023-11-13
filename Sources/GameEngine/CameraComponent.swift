@@ -10,15 +10,11 @@ import GameplayKit
 
 public class CameraComponent: GKComponent {
 	var cameraName: String
-	public weak var node: GameNode {
-		if let n = entity as? GameNode{
-			return n
-		} else {
-			fatalError("error in camera component. it is not a node")
-		}
+	public weak var node: GameNode? {
+		entity as? GameNode
 	}
-	public var viewMatrix: matrix_float4x4 {
-		var viewMatrix = matrix_identity_float4x4
+	public var viewMatrix: Matrix {
+		var viewMatrix = Matrix.identity
 		viewMatrix.rotate(angle: node.rotation.x, axis: .x)
 		viewMatrix.rotate(angle: node.rotation.y, axis: .y)
 		viewMatrix.rotate(angle: node.rotation.z, axis: .z)
@@ -26,7 +22,7 @@ public class CameraComponent: GKComponent {
 		
 		return viewMatrix
 	}
-	public var position: simd_float3 {
+	public var position: Float3 {
 		node!.position
 	}
 	public var fov: Float
@@ -35,11 +31,11 @@ public class CameraComponent: GKComponent {
 	public var far: Float
 
 	
-	public var projectionMatrix: matrix_float4x4 {
-		return matrix_float4x4.perspective(degreesFov: fov,
-										   aspectRatio: aspectRatio,
-										   near: near,
-										   far: far)
+	public var projectionMatrix: Matrix {
+		Matrix.perspective(degreesFov: fov,
+			aspectRatio: aspectRatio,
+			near: near,
+			far: far)
 	}
 	
 	public init(named cameraType: String, fov: Float, aspectRatio: Float, near: Float, far: Float){

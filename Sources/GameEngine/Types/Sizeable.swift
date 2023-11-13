@@ -22,9 +22,9 @@ extension sizeable{
 }
 
 extension Int: sizeable{}
-extension float3: sizeable{}
-extension float4: sizeable {}
-extension float2: sizeable {}
+extension Float3: sizeable{}
+extension Float4: sizeable {}
+extension Float2: sizeable {}
 extension Float: sizeable {}
-extension matrix: sizeable {}
+extension Matrix: sizeable {}
 

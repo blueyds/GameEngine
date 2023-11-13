@@ -9,13 +9,13 @@ import simd
 import Foundation
 
 public struct ModelConstants: sizeable {
-	public var modelMatrix = matrix.identity
+	public var modelMatrix = Matrix.identity
 }
 
 public struct SceneConstants:sizeable {
 	public var totalGameTime: Float = 0
-	public var viewMatrix = matrix.identity
-	public var projectionMatrix = matrix.identity
-	public var cameraPosition = float3.zero
+	public var viewMatrix = Matrix.identity
+	public var projectionMatrix = Matrix.identity
+	public var cameraPosition = Float3.zero
 }
 

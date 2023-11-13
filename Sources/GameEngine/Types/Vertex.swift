@@ -1,14 +1,14 @@
 
 
 public struct Vertex: sizeable {
-	public var position: float3
-	public var color: GameColor
-	public var textureCoordinate: float2
-	public var normal: float3
-	public init(position: float3,
-				color: GameColor,
-				textureCoordinate: float2,
-				normal: float3){
+	public var position: Float3
+	public var color: Float4
+	public var textureCoordinate: Float2
+	public var normal: Float3
+	public init(position: Float3,
+				color: Float4,
+				textureCoordinate: Float2,
+				normal: Float3){
 		self.position = position
 		self.color = color
 		self.textureCoordinate = textureCoordinate

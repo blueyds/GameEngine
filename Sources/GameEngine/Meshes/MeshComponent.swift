@@ -37,18 +37,14 @@ public class MeshComponent: GKComponent {
 	var renderState: MTLRenderPipelineState
 	var depthStencilState: MTLDepthStencilState
 	var samplerState: MTLSamplerState
-	private weak var _node: GameNode {
-        if let n = entity as? GameNode{
-            return n
-        } else {
-            fatalError("mesh entity ios not GameNode")
-        }
+	private weak var _node: GameNode? {
+        entity as? GameNode
 	}
 	public init (mesh: Mesh) {
 	
 		self.mesh = mesh
 		self.material = Material()
-       guard let engine = MeshComponent.Engine {
+       guard let engine = MeshComponent.Engine else {
            fatalError("Set MeshComponent.engine prior to initializing any meshes")
        }
 		
@@ -61,7 +57,7 @@ public class MeshComponent: GKComponent {
 	public init(mesh: Mesh, instanceCount: Int){
 		self.mesh = mesh
 		mesh.setInstanceCount(instanceCount)
-		guard let engine = MeshComponent.Engine {
+		guard let engine = MeshComponent.Engine else{
            fatalError("Set MeshComponent.engine prior to initializing any meshes")
        }
 		

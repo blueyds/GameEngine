@@ -21,10 +21,10 @@ open class CustomMesh: Mesh {
 	}
 	open func createVertices() {	}
 	
-	public func addVertex(position: float3,
-				   textureCoordinates: float2 = float2.zero,
-				   normal: float3 = float3(0,1,0)){
-		_vertices.append(Vertex(position: position, color: color, textureCoordinate: textureCoordinates, normal: normal))
+	public func addVertex(position: Float3,
+				   textureCoordinates: Float2 = Float2.zero,
+				   normal: Float3 = Float3(0,1,0)){
+		_vertices.append(Vertex(position: position, color: color.vertex, textureCoordinate: textureCoordinates, normal: normal))
 	}
 	func createBuffers(){
 		_vertexBuffer = CustomMesh.Engine!.device.makeBuffer(bytes: _vertices, length: Vertex.stride(_vertices.count) )

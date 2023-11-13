@@ -20,8 +20,7 @@ open class GameScene: GameNode {
 	// var camera = DebugCamera()
 	public init(){
 		super.init(name: "Scene")
-		self._scene = self
-        
+		self.scene = self
 		buildScene()
 		print(self)
 	}
@@ -64,7 +63,7 @@ open class GameScene: GameNode {
     
 }
 extension GameScene{
-    public func scanComponents(from child: GameNode){
+    func scanComponents(from child: GameNode){
        // if _scene == nil { return }
         if child.component(ofType: MeshComponent.self) != nil{
 			_scene!._meshManager.addComponent(foundIn: child)
