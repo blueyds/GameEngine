@@ -20,9 +20,9 @@ public class MeshManager {
 	}
 	public func renderAll(rce: MTLRenderCommandEncoder){
 		_components.components.forEach(){
-			if node != nil {
-				rce.pushDebugGroup(node!.name)
-				node!.doRender(rce)
+			if $0.node != nil {
+				rce.pushDebugGroup($0.node!.name)
+				$0.node!.doRender(rce)
 				rce.popDebugGroup()
 			}
 		}

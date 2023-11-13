@@ -38,7 +38,7 @@ public class MeshComponent: GKComponent {
 	var renderState: MTLRenderPipelineState
 	var depthStencilState: MTLDepthStencilState
 	var samplerState: MTLSamplerState
-	private weak var _node: GameNode? {
+	weak var _node: GameNode? {
         entity as? GameNode
 	}
 	public init (mesh: Mesh) {
@@ -99,8 +99,8 @@ public class MeshComponent: GKComponent {
 		if modelConstants.count == 1 {
 			modelConstants[0].modelMatrix = _node.modelMatrix
 		} else {
-			var pointer = _modelConstantBuffer.contents().bindMemory(to: ModelConstants.self, capacity: _node.children.count)
-			for child in _node.children {
+			var pointer = _modelConstantBuffer.contents().bindMemory(to: ModelConstants.self, capacity: _node!.children.count)
+			for child in _node!.children {
 				pointer.pointee.modelMatrix = child.modelMatrix
 				pointer = pointer.advanced(by: 1)
 			}

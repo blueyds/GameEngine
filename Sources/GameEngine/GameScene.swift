@@ -66,13 +66,13 @@ extension GameScene{
     func scanComponents(from child: GameNode){
        // if _scene == nil { return }
         if child.component(ofType: MeshComponent.self) != nil{
-			_scene!._meshManager.addComponent(foundIn: child)
+			scene!._meshManager.addComponent(foundIn: child)
 		}
 		if child.component(ofType: LightComponent.self) != nil{
-			_scene!._lightManager.addComponent(foundIn: child)
+			scene!._lightManager.addComponent(foundIn: child)
 		}
 		if let component = child.component(ofType: CameraComponent.self){
-			_scene!._camera = component
+			scene!._camera = component
 		}
     }
 }
@@ -132,12 +132,6 @@ extension GameScene {
 	public func removeCameraComponent(fromChild: GameNode) {
 		fromChild.removeComponent(ofType: CameraComponent.self)
 		_camera = nil
-	}
-}
-
-extension GameNode {
-	public var Scene: GameScene? {
-		self.root as? GameScene
 	}
 }
 

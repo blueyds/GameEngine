@@ -23,7 +23,7 @@ public class LightComponent: GKComponent {
 	}
 
 	public override func update(deltaTime: TimeInterval) {
-		lightData.position = node.position
+		lightData.position = node!.position
 	}
 }
 

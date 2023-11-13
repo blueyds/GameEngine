@@ -46,7 +46,7 @@ open class GameNode: GKEntity, Identifiable {
 	public func addChild(_ child: GameNode){
 		child.parent = self
 		child.scene = self.scene
-        scene.scanComponents(from: child)
+        scene!.scanComponents(from: child)
         children.append(child)
 	}
 	open func doUpdate(deltaTime: TimeInterval) {	}

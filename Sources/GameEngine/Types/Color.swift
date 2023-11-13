@@ -1,7 +1,7 @@
 import simd
 import Metal
 
-public struct GameColor: Sizeable{
+public struct GameColor: sizeable{
     public var r: Float
     public var g: Float
     public var b: Float

@@ -15,10 +15,10 @@ public class CameraComponent: GKComponent {
 	}
 	public var viewMatrix: Matrix {
 		var viewMatrix = Matrix.identity
-		viewMatrix.rotate(angle: node.rotation.x, axis: .x)
-		viewMatrix.rotate(angle: node.rotation.y, axis: .y)
-		viewMatrix.rotate(angle: node.rotation.z, axis: .z)
-		viewMatrix.translate(direction: -node.position)
+		viewMatrix.rotate(angle: node!.rotation.x, axis: .x)
+		viewMatrix.rotate(angle: node!.rotation.y, axis: .y)
+		viewMatrix.rotate(angle: node!.rotation.z, axis: .z)
+		viewMatrix.translate(direction: -node!.position)
 		
 		return viewMatrix
 	}
