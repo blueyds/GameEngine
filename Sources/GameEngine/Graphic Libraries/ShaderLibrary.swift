@@ -46,7 +46,7 @@ public class ShaderLibrary {
     private func createShader(_ functionName: String)-> Shader{
         Shader(functionName: functionName, library: library)
     }
-	public subscript(_ name: String, _ fnType: FunctionType) -> MTLFunction? {
+	public subscript(_ name: String, _ fnType: ShaderLibrary.FunctionType) -> MTLFunction? {
 		switch fnType{
             case vertex:
                 return vertexShaders[name]?.function

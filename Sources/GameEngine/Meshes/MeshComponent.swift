@@ -17,11 +17,12 @@ public class MeshComponent: GKComponent {
 			if texture == nil {
 				self.material.useTexture = false
 				self.material.useMaterialColor = true
-				self.renderState = MeshComponent.Engine!.defaultBasicRenderState
+				self.renderState = MeshComponent.Engine!.renderStates["default"]
 			} else {
 				self.material.useTexture = true
 				self.material.useMaterialColor = false
-				self.renderState = MeshComponent.Engine!.basicRenderStateNoDepth
+                // TODO: should bel basicRenderwithNoDepth
+				self.renderState = MeshComponent.Engine!.renderStates["default"]
 
 			}	
 		}
@@ -72,7 +73,7 @@ public class MeshComponent: GKComponent {
 	public override func didAddToEntity(){
 		if modelConstants.count != 1 {
 			for _ in 0..<modelConstants.count {
-				_node.addChild(GameNode(name: "\(_node.name).Instanced_node"))
+				_node!.addChild(GameNode(name: "\(_node!.name).Instanced_node"))
 			}
 		}
 	}
@@ -136,25 +137,25 @@ extension MeshComponent{
 		result.texture = texture
 		return result
 	}
-	func color(_ color: simd_float4)-> MeshComponent{
+	func color(_ color: Float4)-> MeshComponent{
 		let result = self
 		result.material.color = color
 		return result
 
 	}
-	func ambient(_ color: simd_float3)-> MeshComponent{
+	func ambient(_ color: Float3)-> MeshComponent{
 		let result = self
 		result.material.ambient = color
 		return result
 
 	}
-	func diffuse(_ color: simd_float3)-> MeshComponent{
+	func diffuse(_ color: Float3)-> MeshComponent{
 		let result = self
 		result.material.diffuse = color
 		return result
 
 	}
-	func specular(_ color: simd_float3)-> MeshComponent{
+	func specular(_ color: Float3)-> MeshComponent{
 		let result = self
 		result.material.specular = color
 		return result
