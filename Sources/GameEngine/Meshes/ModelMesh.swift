@@ -29,7 +29,10 @@ public class ModelMesh: Mesh {
 				vertexDescriptorName: String = "default"){
 		guard let engine = ModelMesh.Engine else { 
 			fatalError("ModelMesh.Engine should be set before initializing any Meshes")}
-		loadModel(modelName: modelName, ext: ext, vertexDescriptor: engine.descriptors[vertexDescriptorName]!.vertexDescriptor)	
+		guard let descriptor = engine.descriptors[vertexDescriptorName] else {
+			fatalError("VertexDescriptor not registered with engine named \(vertexDescriptorName)")
+		}
+		loadModel(modelName: modelName, ext: ext, vertexDescriptor: descriptor)	
 	}
 	var instanceCount: Int = 1
 	public func setInstanceCount(_ count: Int) {
