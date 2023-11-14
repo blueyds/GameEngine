@@ -77,7 +77,7 @@ extension GameNode {
 	}
 	public func Scale(by value: Float) -> GameNode {
 		let result = self
-		result.scale = float3(repeating: value)
+		result.scale = Float3(repeating: value)
 		return result
 	}
 	public func Rotation(by value: Float3) -> GameNode {
