@@ -16,6 +16,9 @@ public struct GameColor: sizeable{
     public var vector: Float4 {
         Float4(r, g, b, a)
     }
+	public var float3: Float3 {
+		Float3(r, g, b)
+	}
     public var clearColor: MTLClearColor{
         MTLClearColorMake(Double(r), Double(g), Double(b), Double(a))
     }

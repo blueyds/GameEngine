@@ -1,4 +1,4 @@
-// swift-tools-version: 5.6
+// swift-tools-version: 5.8
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -15,8 +15,8 @@ let package = Package(
     dependencies: [],
     targets: [
         .target(name: "GameEngine",
-				resources: [
-					Resource.copy("Metal Shader Files/*.txt") ] ),
+				resources: [Resource.copy("Metal Shader Files/*.txt") ]
+			   ),
         .testTarget( name: "GameEngineTests",
 					 dependencies: ["GameEngine"])
     ]

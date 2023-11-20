@@ -134,42 +134,67 @@ public class MeshComponent: GKComponent {
 }
 // modifier extensions
 extension MeshComponent{
-	func texture(_ texture: Texture) -> MeshComponent{
+	public func texture(_ texture: Texture) -> MeshComponent{
 		let result = self
 		result.texture = texture
 		return result
 	}
-	func color(_ color: Float4)-> MeshComponent{
+	public func color(_ color: Float4)-> MeshComponent{
 		let result = self
 		result.material.color = color
 		return result
 
 	}
-	func ambient(_ color: Float3)-> MeshComponent{
+	public func color(_ color: GameColor)-> MeshComponent{
 		let result = self
+		result.material.color = color.vector
+		return result
+	}
+	public func ambient(_ color: Float3)-> MeshComponent{
+		let result = self
+		result.material.isLit = true
 		result.material.ambient = color
 		return result
 
 	}
-	func diffuse(_ color: Float3)-> MeshComponent{
+	public func ambient(_ color: Float) -> MeshComponent{
 		let result = self
+		result.material.isLit = true
+		result.material.ambient = Float3(repeating: color)
+		return result
+	}
+	public func diffuse(_ color: Float3)-> MeshComponent{
+		let result = self
+		result.material.isLit = true
 		result.material.diffuse = color
 		return result
-
 	}
-	func specular(_ color: Float3)-> MeshComponent{
+	public func diffuse(_ color: Float) -> MeshComponent {
 		let result = self
+		result.material.isLit = true
+		result.material.diffuse = Float3(repeating: color)
+		return result
+	}
+	public func specular(_ color: Float3)-> MeshComponent{
+		let result = self
+		result.material.isLit = true
 		result.material.specular = color
 		return result
-
 	}
-	func shininess(_ value: Float)-> MeshComponent{
+	public func specular(_ color: Float) -> MeshComponent{
 		let result = self
+		result.material.isLit = true
+		result.material.specular = Float3(repeating: color)
+		return result
+	}
+	public func shininess(_ value: Float)-> MeshComponent{
+		let result = self
+		result.material.isLit = true
 		result.material.shininess = value
 		return result
 
 	}
-	func isLit(_ value: Bool)-> MeshComponent{
+	public func isLit(_ value: Bool)-> MeshComponent{
 		let result = self
 		result.material.isLit = value
 		return result
