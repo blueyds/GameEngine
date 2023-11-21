@@ -11,7 +11,7 @@ open class CustomMesh: Mesh {
     private var _color: GameColor
 
     
-	public init(color: GameColor = .black) {
+	public init(color: GameColor = .black()) {
         _color = color
 		createVertices()
 		createBuffers()
