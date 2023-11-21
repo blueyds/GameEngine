@@ -17,12 +17,12 @@ public class MeshComponent: GKComponent {
 			if texture == nil {
 				self.material.useTexture = false
 				self.material.useMaterialColor = true
-				self.renderState = MeshComponent.Engine!.renderStates["default"]!
+				self.renderState = GlobalEngine.renderStates["default"]!
 			} else {
 				self.material.useTexture = true
 				self.material.useMaterialColor = false
                 // TODO: should bel basicRenderwithNoDepth
-				self.renderState = MeshComponent.Engine!.renderStates["default"]!
+				self.renderState = GlobalEngine.renderStates["default"]!
 
 			}	
 		}
@@ -40,7 +40,7 @@ public class MeshComponent: GKComponent {
 	
 		self.mesh = mesh
 		self.material = Material()
-		renderState = engine.renderStates["default"]!
+		renderState = GlobalEngine.renderStates["default"]!
 		depthStencilState = GlobalEngine.depthStencilStates["default"]!
 		samplerState = GlobalEngine.samplerStates["default"]!
 		super.init()

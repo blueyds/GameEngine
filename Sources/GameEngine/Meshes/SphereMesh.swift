@@ -7,7 +7,7 @@ public class Sphere: ModelIOMesh {
     
     public init(segments: UInt32 = 30){
         super.init()
-        let allocator = MTKMeshBufferAllocator(device: ModelIOMesh.Engine!.device)
+        let allocator = MTKMeshBufferAllocator(device: GlobalEngine.device)
         let mdlMesh = MDLMesh(
             sphereWithExtent: vector_float3(1,1,1), 
             segments: vector_uint2(repeating: segments), 
@@ -15,7 +15,7 @@ public class Sphere: ModelIOMesh {
             geometryType: .triangles, 
             allocator: allocator)
         do{
-            self.mesh = try MTKMesh(mesh: mdlMesh, device: ModelIOMesh.Engine!.device)
+            self.mesh = try MTKMesh(mesh: mdlMesh, device: GlobalEngine.device)
         } catch  {
             print("error initializing SPhere mesh for object. Error is: \(error)")
         }
