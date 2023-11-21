@@ -127,16 +127,13 @@ extension MeshComponent{
 		result.texture = texture
 		return result
 	}
-	public func color(_ color: Float4)-> MeshComponent{
+	public func color(_ color: GameColor)-> MeshComponent{
 		let result = self
-		result.material.color = color
+		result.material.color = color.vector
 		result.material.useMaterialColor = true
 		return result
-
 	}
-	public func color(_ color: GameColor)-> MeshComponent{
-		color(color.vector)
-	}
+	
 	public func ambient(_ color: Float3)-> MeshComponent{
 		let result = self
 		result.material.isLit = true
