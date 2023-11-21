@@ -9,12 +9,9 @@ open class CustomMesh: Mesh {
 	}
 	var instanceCount: Int = 1
     private var _color: GameColor
-	static var Engine: EngineProtocol? = nil
+
     
 	public init(color: GameColor) {
-		if CustomMesh.Engine == nil {
-			fatalError("MeshComponent.Engine should be initialized before any meshes")
-		}
         _color = color
 		createVertices()
 		createBuffers()
@@ -27,7 +24,7 @@ open class CustomMesh: Mesh {
 		_vertices.append(Vertex(position: position, color: _color.vector, textureCoordinate: textureCoordinates, normal: normal))
 	}
 	func createBuffers(){
-		_vertexBuffer = CustomMesh.Engine!.device.makeBuffer(bytes: _vertices, length: Vertex.stride(_vertices.count) )
+		_vertexBuffer = GlobalEngine.device.makeBuffer(bytes: _vertices, length: Vertex.stride(_vertices.count) )
 	}
 	public func setInstanceCount(_ count: Int) {
 		instanceCount = count

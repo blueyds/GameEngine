@@ -6,6 +6,11 @@
 //
 
 import MetalKit
+ var GlobalEngine: EngineProtocol!
+ 
+public func registerGlobalEngine(_ engine: EngineProtocol){
+	GlobalEngine = engine
+}
 
 /// Set of basic libraries that the game should implement in order to have a basic engine in place.
 public protocol EngineProtocol {

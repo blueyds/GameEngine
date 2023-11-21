@@ -10,16 +10,13 @@ import MetalKit
 public class ModelMesh: Mesh {
 	
 	
-	private var _meshes: [Any]!
+	private var _meshes: [MTKMesh]!
 	public var vertexCount: Int!
-	static var Engine: EngineProtocol? = nil
+	
 	
 	public init(modelName: String,
 				ext: String = "obj",
 				vertexDescriptor: MTLVertexDescriptor){
-		if ModelMesh.Engine == nil {
-			fatalError("MeshComponent.Enginei should be set before initalizing any Meshes")
-		}
 		loadModel(modelName: modelName,
 				  ext: ext,
 				  vertexDescriptor: vertexDescriptor)
@@ -27,9 +24,7 @@ public class ModelMesh: Mesh {
 	public init(modelName: String,
 				ext: String = "obj",
 				vertexDescriptorName: String = "default"){
-		guard let engine = ModelMesh.Engine else { 
-			fatalError("ModelMesh.Engine should be set before initializing any Meshes")}
-		guard let descriptor = engine.descriptors[vertexDescriptorName] else {
+		guard let descriptor = GlobalEngine.descriptors[vertexDescriptorName] else {
 			fatalError("VertexDescriptor not registered with engine named \(vertexDescriptorName)")
 		}
 		loadModel(modelName: modelName, ext: ext, vertexDescriptor: descriptor)	
@@ -52,20 +47,20 @@ public class ModelMesh: Mesh {
 		(descriptor.attributes[3] as! MDLVertexAttribute).name = MDLVertexAttributeNormal
 		
 		
-		let bufferAllocator = MTKMeshBufferAllocator(device: ModelMesh.Engine!.device)
+		let bufferAllocator = MTKMeshBufferAllocator(device: GlobalEngine.device)
 		let asset: MDLAsset = MDLAsset(url: assetUrl,
 									   vertexDescriptor: descriptor,
 									   bufferAllocator: bufferAllocator)
 		do{
-			self._meshes = try MTKMesh.newMeshes(asset: asset, device: ModelMesh.Engine!.device).metalKitMeshes
+			self._meshes = try MTKMesh.newMeshes(asset: asset, device: GlobalEngine.device).metalKitMeshes
 		} catch {
 			print("ERROR::LOADING_MESH::__\(modelName)__\(error)")
 		}
 	}
 	
 	public func drawPrimitives(_ renderCommandEncoder: MTLRenderCommandEncoder) {
-		guard let meshes = self._meshes as? [MTKMesh] else {return}
-		for mesh in meshes {
+		//guard let meshes = self._meshes as? [MTKMesh] else {return}
+		for mesh in _meshes {
 			for vertexBuffer in mesh.vertexBuffers {
 				renderCommandEncoder.setVertexBuffer(vertexBuffer.buffer,
 													 offset: vertexBuffer.offset,

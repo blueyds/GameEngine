@@ -28,12 +28,7 @@ public class MeshComponent: GKComponent {
 		}
 	}
 	var mesh: Mesh!
-	static public var Engine: EngineProtocol? = nil{
-		didSet{
-			CustomMesh.Engine = Engine
-			ModelMesh.Engine = Engine
-		}
-	}
+	
 	private var _modelConstantBuffer: MTLBuffer!
 	var renderState: MTLRenderPipelineState
 	var depthStencilState: MTLDepthStencilState
@@ -44,27 +39,20 @@ public class MeshComponent: GKComponent {
 	public init (mesh: Mesh) {
 	
 		self.mesh = mesh
-		self.material = Material()
-       guard let engine = MeshComponent.Engine else {
-           fatalError("Set MeshComponent.engine prior to initializing any meshes")
-       }
-		
+		self.material = Material(0
 		renderState = engine.renderStates["default"]!
-		depthStencilState = engine.depthStencilStates["default"]!
-		samplerState = engine.samplerStates["default"]!
+		depthStencilState = GlobalEngine.depthStencilStates["default"]!
+		samplerState = GlobalEngine.samplerStates["default"]!
 		super.init()
         createModelConstants(1)
 	}
 	public init(mesh: Mesh, instanceCount: Int){
 		self.mesh = mesh
 		mesh.setInstanceCount(instanceCount)
-		guard let engine = MeshComponent.Engine else{
-           fatalError("Set MeshComponent.engine prior to initializing any meshes")
-       }
 		
-		renderState = engine.renderStates["default"]!
-		depthStencilState = engine.depthStencilStates["default"]!
-		samplerState = engine.samplerStates["default"]!
+		renderState = GlobalEngine.renderStates["default"]!
+		depthStencilState = GlobalEngine.depthStencilStates["default"]!
+		samplerState = GlobalEngine.samplerStates["default"]!
 		super.init()
 		createModelConstants(instanceCount)
 		createBuffers(instanceCount)
