@@ -39,7 +39,7 @@ public class MeshComponent: GKComponent {
 	public init (mesh: Mesh) {
 	
 		self.mesh = mesh
-		self.material = Material(0
+		self.material = Material()
 		renderState = engine.renderStates["default"]!
 		depthStencilState = GlobalEngine.depthStencilStates["default"]!
 		samplerState = GlobalEngine.samplerStates["default"]!
@@ -72,7 +72,7 @@ public class MeshComponent: GKComponent {
 		}
 	}
 	func createBuffers(_ instanceCount: Int){
-		_modelConstantBuffer = MeshComponent.Engine?.device.makeBuffer(	length: ModelConstants.stride(instanceCount), options: [])
+		_modelConstantBuffer = GlobalEngine.device.makeBuffer(	length: ModelConstants.stride(instanceCount), options: [])
 	}
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")

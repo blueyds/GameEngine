@@ -4,12 +4,10 @@ import MetalKit
 open class ModelIOMesh: Mesh {
     public var instanceCount: Int = 1
     public var mesh: MTKMesh? = nil
-    public static var Engine: EngineProtocol? = MeshComponent.Engine
+
     
     public init(){
-        if ModelIOMesh.Engine == nil {
-            fatalError("MeshCompjononet engine should be initialized before meshes")
-        }
+      
         // let allocator = MTKMeshBufferAllocator(device: myMetalDevice)
         // let mdlMesh = MDLMesh(scnGeometry: sceneGeometry, bufferAllocator: allocator)
         //  let mtkMesh = try! MTKMesh(mesh: mdlMesh, device: myMetalDevice)
