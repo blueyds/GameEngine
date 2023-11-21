@@ -93,11 +93,11 @@ public class MeshComponent: GKComponent {
 				pointer = pointer.advanced(by: 1)
 			}
 		}
-    }
+	}
 	
 	public func doRender(_ rCe: MTLRenderCommandEncoder) {
-	    rCe.pushDebugGroup(_node!.name)
-       rCe.setRenderPipelineState(renderState)
+		rCe.pushDebugGroup(_node!.name)
+		rCe.setRenderPipelineState(renderState)
 
 		
 		//Vertex Shader
@@ -116,8 +116,32 @@ public class MeshComponent: GKComponent {
 			rCe.setDepthStencilState(depthStencilState)
 		}
 		mesh.drawPrimitives(rCe)
-         rCe.popDebugGroup()
+		rCe.popDebugGroup()
 		
+	}
+	public func renderState(named name: String) -> MeshComponent{
+		guard let newState = GlobalEngine.renderStates[name] else{
+			return self
+		}
+		let result = self
+		result.renderState = newState
+		return result
+	}
+	public func depthStencilState(named name: String)-> MeshComponent{
+		guard let newState = GlobalEngine.depthStencilStates[name] else{
+			return self
+		}
+		let result = self
+		result.depthStencilState = newState
+		return result
+	}
+	public func samplerState(named name: String)-> MeshComponent{
+		guard let newState = GlobalEngine.samplerStates[name] else {
+			return self
+		}
+		let result = self
+		result.samplerState = newState
+		return result
 	}
 }
 // modifier extensions
