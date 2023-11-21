@@ -130,13 +130,12 @@ extension MeshComponent{
 	public func color(_ color: Float4)-> MeshComponent{
 		let result = self
 		result.material.color = color
+		result.material.useMaterialColor = true
 		return result
 
 	}
 	public func color(_ color: GameColor)-> MeshComponent{
-		let result = self
-		result.material.color = color.vector
-		return result
+		color(color.vector)
 	}
 	public func ambient(_ color: Float3)-> MeshComponent{
 		let result = self
@@ -146,10 +145,7 @@ extension MeshComponent{
 
 	}
 	public func ambient(_ color: Float) -> MeshComponent{
-		let result = self
-		result.material.isLit = true
-		result.material.ambient = Float3(repeating: color)
-		return result
+		ambient(Float3(repeating: color))
 	}
 	public func diffuse(_ color: Float3)-> MeshComponent{
 		let result = self
@@ -158,10 +154,7 @@ extension MeshComponent{
 		return result
 	}
 	public func diffuse(_ color: Float) -> MeshComponent {
-		let result = self
-		result.material.isLit = true
-		result.material.diffuse = Float3(repeating: color)
-		return result
+		diffuse( Float3(repeating: color))
 	}
 	public func specular(_ color: Float3)-> MeshComponent{
 		let result = self
@@ -170,10 +163,7 @@ extension MeshComponent{
 		return result
 	}
 	public func specular(_ color: Float) -> MeshComponent{
-		let result = self
-		result.material.isLit = true
-		result.material.specular = Float3(repeating: color)
-		return result
+		specular(Float3(repeating: color))
 	}
 	public func shininess(_ value: Float)-> MeshComponent{
 		let result = self
