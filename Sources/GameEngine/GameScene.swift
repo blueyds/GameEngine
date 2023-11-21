@@ -63,7 +63,7 @@ open class GameScene: GameNode {
     
 }
 extension GameScene{
-    func scanComponents(from child: GameNode){
+    public func scanComponents(from child: GameNode){
        // if _scene == nil { return }
         if child.component(ofType: MeshComponent.self) != nil{
 			scene!._meshManager.addComponent(foundIn: child)
