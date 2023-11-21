@@ -1,5 +1,5 @@
 import simd
-import Metal
+import MetalKit
 
 public struct GameColor: sizeable{
     public var r: Float
